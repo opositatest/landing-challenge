@@ -1,32 +1,10 @@
-import { defineVitestConfig } from '@stencil/vitest/config';
-import { playwright } from '@vitest/browser-playwright';
+import { defineConfig } from 'vitest/config';
 
-export default defineVitestConfig({
-  stencilConfig: './stencil.config.ts',
+export default defineConfig({
   test: {
-    projects: [
-      // Unit tests - stencil environment for component logic
-      {
-        test: {
-          name: 'unit',
-          include: ['src/**/*.unit.test.{ts,tsx}'],
-          environment: 'stencil',
-        },
-      },
-      // Component browser tests - real browser via Playwright
-      {
-        test: {
-          name: 'browser',
-          include: ['src/**/*.cmp.test.{ts,tsx}'],
-          setupFiles: ['./vitest-setup.ts'],
-          browser: {
-            enabled: true,
-            provider: playwright(),
-            headless: true,
-            instances: [{ browser: 'chromium' }],
-          },
-        },
-      },
-    ],
+    environment: 'jsdom',
+    globals: true,
+    include: ['src/**/*.test.ts'],
+    setupFiles: ['./vitest-setup.ts'],
   },
 });

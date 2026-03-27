@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { action } from 'storybook/actions';
 
+import '../../index.ts';
+
 type OpoButtonArgs = {
   variant: 'primary' | 'secondary';
   disabled: boolean;

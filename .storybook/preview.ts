@@ -2,7 +2,7 @@ import type { Preview } from '@storybook/web-components-vite';
 
 import '../src/global/global.css';
 import '../src/foundations/foundations.css';
-import '../dist/landing-challenge/landing-challenge.esm.js';
+import '../src/index.ts';
 
 const preview: Preview = {
   parameters: {

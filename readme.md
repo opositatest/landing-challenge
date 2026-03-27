@@ -1,6 +1,6 @@
-# Stencil Landing Challenge
+# Lit Landing Challenge
 
-Starter para una prueba técnica centrada en `Stencil`, `Web Components` y `Storybook`.
+Starter para una prueba técnica centrada en `Lit`, `Web Components` y `Storybook`.
 
 La base está preparada para que la persona candidata clone el repo, instale dependencias y empiece a trabajar sin perder tiempo en setup. El starter incluye un único componente de ejemplo, `opo-button`, y una landing externa separada de la librería.
 
@@ -27,7 +27,7 @@ Storybook local:
 
 ## Objetivo de la prueba
 
-Construir una landing page usando `Stencil` y documentar los componentes en `Storybook`.
+Construir una landing page usando `Lit` y documentar los componentes en `Storybook`.
 
 La idea es que la pagina viva fuera de la librería de componentes, como ocurriría en una web consumidora del paquete.
 
@@ -51,7 +51,7 @@ Estilos globales:
 
 ## Lo que ya viene hecho
 
-- Entorno base de Stencil listo para arrancar.
+- Entorno base de Lit listo para arrancar.
 - Landing externa inicial en `landing/`.
 - Un único componente de ejemplo: `opo-button`.
 - Storybook configurado para documentar componentes de la librería.
@@ -62,15 +62,15 @@ El resto de componentes debe decidirlo y construirlo la persona candidata.
 
 La landing no importa componentes uno a uno ni requiere tocar `package.json` cada vez que se añade uno nuevo.
 
-La web externa carga solo el bundle raíz de Stencil desde:
+La web externa carga directamente el entry principal de la librería desde:
 
 `landing/main.ts`
 
-Ese bundle registra automáticamente los Web Components compilados por la librería, así que cualquier componente nuevo que se cree en `src/components/` pasa a estar disponible en la landing tras recompilar.
+Ese entry registra automáticamente los Web Components, así que cualquier componente nuevo que se cree en `src/components/` pasa a estar disponible en la landing en cuanto se importe desde `src/index.ts`.
 
 ## Requisitos esperados
 
-- Usar `Stencil` para construir componentes reutilizables.
+- Usar `Lit` para construir componentes reutilizables.
 - Montar la landing desde la web externa, no desde un componente contenedor dentro de la librería.
 - Documentar en Storybook los componentes.
 - Organizar la solución con una jerarquía de componentes clara.
@@ -103,5 +103,5 @@ Ese bundle registra automáticamente los Web Components compilados por la librer
 
 La estructura actual está pensada para que la landing y la librería convivan en el mismo repo, pero separadas:
 
-- `npm start` levanta una landing externa en Vite y recompila la librería de Stencil en paralelo.
-- `npm run storybook` levanta Storybook y recompila Stencil en paralelo para reflejar cambios en componentes.
+- `npm start` levanta la landing externa con Vite.
+- `npm run storybook` levanta Storybook consumiendo los componentes Lit directamente desde `src/`.

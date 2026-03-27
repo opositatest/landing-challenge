@@ -6,70 +6,19 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface OpoButton {
-        /**
-          * @default false
-         */
-        "disabled": boolean;
-        /**
-          * @default 'primary'
-         */
-        "variant": 'primary' | 'secondary';
-    }
-}
-export interface OpoButtonCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLOpoButtonElement;
 }
 declare global {
-    interface HTMLOpoButtonElementEventMap {
-        "opoClick": void;
-    }
-    interface HTMLOpoButtonElement extends Components.OpoButton, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLOpoButtonElementEventMap>(type: K, listener: (this: HTMLOpoButtonElement, ev: OpoButtonCustomEvent<HTMLOpoButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLOpoButtonElementEventMap>(type: K, listener: (this: HTMLOpoButtonElement, ev: OpoButtonCustomEvent<HTMLOpoButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLOpoButtonElement: {
-        prototype: HTMLOpoButtonElement;
-        new (): HTMLOpoButtonElement;
-    };
     interface HTMLElementTagNameMap {
-        "opo-button": HTMLOpoButtonElement;
     }
 }
 declare namespace LocalJSX {
-    interface OpoButton {
-        /**
-          * @default false
-         */
-        "disabled"?: boolean;
-        "onOpoClick"?: (event: OpoButtonCustomEvent<void>) => void;
-        /**
-          * @default 'primary'
-         */
-        "variant"?: 'primary' | 'secondary';
-    }
-
-    interface OpoButtonAttributes {
-        "variant": 'primary' | 'secondary';
-        "disabled": boolean;
-    }
-
     interface IntrinsicElements {
-        "opo-button": Omit<OpoButton, keyof OpoButtonAttributes> & { [K in keyof OpoButton & keyof OpoButtonAttributes]?: OpoButton[K] } & { [K in keyof OpoButton & keyof OpoButtonAttributes as `attr:${K}`]?: OpoButtonAttributes[K] } & { [K in keyof OpoButton & keyof OpoButtonAttributes as `prop:${K}`]?: OpoButton[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "opo-button": LocalJSX.IntrinsicElements["opo-button"] & JSXBase.HTMLAttributes<HTMLOpoButtonElement>;
         }
     }
 }

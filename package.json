@@ -1,51 +1,36 @@
 {
   "name": "landing-challenge",
   "version": "0.0.1",
-  "description": "Stencil landing challenge starter with a single opo-button component",
-  "main": "dist/index.cjs.js",
+  "description": "Lit and Web Components challenge starter with a single opo-button component",
+  "main": "dist/index.cjs",
   "module": "dist/index.js",
-  "types": "dist/types/index.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/landing-challenge/landing-challenge.esm.js",
   "exports": {
     ".": {
-      "import": "./dist/landing-challenge/landing-challenge.esm.js",
-      "require": "./dist/landing-challenge/landing-challenge.cjs.js"
-    },
-    "./loader": {
-      "types": "./loader/index.d.ts",
-      "import": "./loader/index.js",
-      "require": "./loader/index.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stenciljs/component-starter.git"
+    "url": "git@github.com:opositatest/landing-challenge.git"
   },
   "files": [
-    "dist/",
-    "loader/"
+    "dist/"
   ],
   "scripts": {
-    "build": "stencil build",
-    "dev:lib": "stencil build --dev --watch",
-    "start:lib": "stencil build --dev --watch --serve",
-    "start": "npm run build && concurrently -k -n STENCIL,SITE \"npm run dev:lib\" \"vite --config landing/vite.config.ts --host 0.0.0.0 --port 3333\"",
-    "storybook": "npm run build && concurrently -k -n STENCIL,SB \"npm run dev:lib\" \"storybook dev -p 6006\"",
-    "build-storybook": "npm run build && storybook build",
-    "test": "stencil-test",
-    "test:watch": "stencil-test --watch",
-    "generate": "stencil generate"
+    "build": "vite build && vite build --config landing/vite.config.ts",
+    "start": "vite --config landing/vite.config.ts --host 0.0.0.0 --port 3333",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
-    "@stencil/core": "^4.27.1",
-    "@stencil/vitest": "^1.8.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/web-components-vite": "^10.3.3",
     "@types/node": "^25.5.0",
-    "@vitest/browser-playwright": "^4.0.0",
-    "concurrently": "^9.1.2",
+    "jsdom": "^29.0.1",
+    "lit": "^3.3.1",
     "storybook": "^10.3.3",
     "vite": "^8.0.3",
     "vitest": "^4.0.0"

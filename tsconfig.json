@@ -3,7 +3,6 @@
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "declaration": false,
-    "experimentalDecorators": true,
     "lib": [
       "dom",
       "es2022"
@@ -13,15 +12,19 @@
     "target": "es2022",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "jsx": "react",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "h.Fragment",
+    "skipLibCheck": true,
     "types": [
-      "@stencil/vitest/globals"
+      "vite/client",
+      "vitest/globals"
     ]
   },
   "include": [
-    "src"
+    ".storybook",
+    "landing",
+    "src",
+    "vitest-setup.ts",
+    "vitest.config.ts",
+    "vite.config.ts"
   ],
   "exclude": [
     "node_modules"
