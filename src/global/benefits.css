@@ -1,0 +1,94 @@
+.benefits {
+  background-color: var(--color-neutral-dark-05);
+  color: var(--color-text-tertiary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-desktop-s);
+  line-height: calc(22 / 16);
+  padding-block: calc(56 / 16 * 1rem);
+  position: relative;
+
+  strong {
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.benefits__first {
+  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-desktop-s);
+  grid-column: 1 / -1;
+
+  @media (width >= 48rem) {
+    align-self: baseline;
+    grid-column: span 6;
+    position: sticky;
+    top: calc((72 / 16) * 1rem + var(--spacing-desktop-xs));
+  }
+
+  @media (width >= 64rem) {
+    align-self: center;
+    grid-column: 2 / span 5;
+    margin-left: calc(var(--spacing-desktop-s) * -1);
+    width: 100%;
+  }
+}
+
+.benefits__title {
+  color: var(--color-neutral-dark-100);
+  font-size: var(--font-size-desktop-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-desktop-xl);
+}
+
+.benefits__decorative {
+  display: none;
+  inset: 0 0 auto auto;
+  position: absolute;
+  user-select: none;
+
+  @media (width >= 48rem) {
+    display: block;
+  }
+}
+
+.list-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-desktop-xs);
+  grid-column: 1 / -1;
+  list-style: none;
+  padding-left: 0;
+
+  @media (width >= 48rem) {
+    grid-column: span 6;
+  }
+
+  @media (width >= 64rem) {
+    grid-column: span 5;
+    left: var(--spacing-desktop-s);
+    padding-inline: calc(20 / 16 * 1rem);
+    position: relative;
+  }
+}
+
+.list-benefits__item {
+  background-color: var(--color-surface-panel);
+  border-radius: 6px;
+  box-shadow: 0px 10px 20px 0px color-mix(in srgb, var(--color-neutral-dark-100) 10%, transparent);
+  color: var(--color-text-tertiary);
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-desktop-s);
+  gap: var(--spacing-desktop-xxs);
+  line-height: var(--font-line-height-desktop-s);
+  padding: var(--spacing-desktop-md) var(--spacing-desktop-l);
+}
+
+.list-benefits__title {
+  color: var(--color-neutral-dark-100);
+  font-size: var(--font-size-desktop-l);
+  font-weight: 400;
+  line-height: var(--font-line-height-desktop-l);
+}

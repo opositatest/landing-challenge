@@ -16,6 +16,28 @@ export namespace Components {
          */
         "variant": 'primary' | 'secondary';
     }
+    interface OpoIcon {
+        "a11yTitle"?: string;
+        /**
+          * @default false
+         */
+        "decorative": boolean;
+        "height"?: number;
+        "icon"?: string;
+        "width"?: number;
+    }
+    interface OpoVideo {
+        /**
+          * @default ''
+         */
+        "playLabel": string;
+        "src": string;
+        "videoId": string;
+        /**
+          * @default ''
+         */
+        "videoTitle": string;
+    }
 }
 export interface OpoButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -39,11 +61,27 @@ declare global {
         prototype: HTMLOpoButtonElement;
         new (): HTMLOpoButtonElement;
     };
+    interface HTMLOpoIconElement extends Components.OpoIcon, HTMLStencilElement {
+    }
+    var HTMLOpoIconElement: {
+        prototype: HTMLOpoIconElement;
+        new (): HTMLOpoIconElement;
+    };
+    interface HTMLOpoVideoElement extends Components.OpoVideo, HTMLStencilElement {
+    }
+    var HTMLOpoVideoElement: {
+        prototype: HTMLOpoVideoElement;
+        new (): HTMLOpoVideoElement;
+    };
     interface HTMLElementTagNameMap {
         "opo-button": HTMLOpoButtonElement;
+        "opo-icon": HTMLOpoIconElement;
+        "opo-video": HTMLOpoVideoElement;
     }
 }
 declare namespace LocalJSX {
+    type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}` | `prop:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K | `prop:${K}`]?: never } | { [P in `prop:${K}`]: PropT } & { [P in K | `attr:${K}`]?: never };
+
     interface OpoButton {
         /**
           * @default false
@@ -55,14 +93,51 @@ declare namespace LocalJSX {
          */
         "variant"?: 'primary' | 'secondary';
     }
+    interface OpoIcon {
+        "a11yTitle"?: string;
+        /**
+          * @default false
+         */
+        "decorative"?: boolean;
+        "height"?: number;
+        "icon"?: string;
+        "width"?: number;
+    }
+    interface OpoVideo {
+        /**
+          * @default ''
+         */
+        "playLabel"?: string;
+        "src": string;
+        "videoId": string;
+        /**
+          * @default ''
+         */
+        "videoTitle"?: string;
+    }
 
     interface OpoButtonAttributes {
         "variant": 'primary' | 'secondary';
         "disabled": boolean;
     }
+    interface OpoIconAttributes {
+        "icon": string;
+        "decorative": boolean;
+        "a11yTitle": string;
+        "width": number;
+        "height": number;
+    }
+    interface OpoVideoAttributes {
+        "videoId": string;
+        "videoTitle": string;
+        "playLabel": string;
+        "src": string;
+    }
 
     interface IntrinsicElements {
         "opo-button": Omit<OpoButton, keyof OpoButtonAttributes> & { [K in keyof OpoButton & keyof OpoButtonAttributes]?: OpoButton[K] } & { [K in keyof OpoButton & keyof OpoButtonAttributes as `attr:${K}`]?: OpoButtonAttributes[K] } & { [K in keyof OpoButton & keyof OpoButtonAttributes as `prop:${K}`]?: OpoButton[K] };
+        "opo-icon": Omit<OpoIcon, keyof OpoIconAttributes> & { [K in keyof OpoIcon & keyof OpoIconAttributes]?: OpoIcon[K] } & { [K in keyof OpoIcon & keyof OpoIconAttributes as `attr:${K}`]?: OpoIconAttributes[K] } & { [K in keyof OpoIcon & keyof OpoIconAttributes as `prop:${K}`]?: OpoIcon[K] };
+        "opo-video": Omit<OpoVideo, keyof OpoVideoAttributes> & { [K in keyof OpoVideo & keyof OpoVideoAttributes]?: OpoVideo[K] } & { [K in keyof OpoVideo & keyof OpoVideoAttributes as `attr:${K}`]?: OpoVideoAttributes[K] } & { [K in keyof OpoVideo & keyof OpoVideoAttributes as `prop:${K}`]?: OpoVideo[K] } & OneOf<"videoId", OpoVideo["videoId"], OpoVideoAttributes["videoId"]> & OneOf<"src", OpoVideo["src"], OpoVideoAttributes["src"]>;
     }
 }
 export { LocalJSX as JSX };
@@ -70,6 +145,8 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "opo-button": LocalJSX.IntrinsicElements["opo-button"] & JSXBase.HTMLAttributes<HTMLOpoButtonElement>;
+            "opo-icon": LocalJSX.IntrinsicElements["opo-icon"] & JSXBase.HTMLAttributes<HTMLOpoIconElement>;
+            "opo-video": LocalJSX.IntrinsicElements["opo-video"] & JSXBase.HTMLAttributes<HTMLOpoVideoElement>;
         }
     }
 }

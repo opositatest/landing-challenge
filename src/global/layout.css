@@ -1,0 +1,35 @@
+.container {
+  gap: var(--spacing-desktop-s);
+  margin-inline: auto;
+  padding-inline: var(--spacing-desktop-xs);
+}
+
+.container--resources {
+  --width: 1038px;
+
+  max-width: calc(var(--width) + (var(--spacing-desktop-xs) * 2));
+}
+
+.container--benefits {
+  position: relative;
+  z-index: 1;
+}
+
+.container--footer {
+  --width: 1036px;
+
+  max-width: calc(var(--width) + (var(--spacing-desktop-xs) * 2));
+}
+
+.container--faq {
+  row-gap: var(--spacing-desktop-xxl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}

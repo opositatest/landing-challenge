@@ -26,6 +26,10 @@
     box-shadow 120ms ease,
     background-color 120ms ease,
     border-color 120ms ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .button:focus-visible {

@@ -36,6 +36,7 @@
     "build-storybook": "npm run build && storybook build",
     "test": "stencil-test",
     "test:watch": "stencil-test --watch",
+    "build:landing": "npm run build && vite build --config landing/vite.config.ts",
     "generate": "stencil generate"
   },
   "devDependencies": {
@@ -50,5 +51,8 @@
     "vite": "^8.0.3",
     "vitest": "^4.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@fontsource/ibm-plex-sans": "^5.2.8"
+  }
 }

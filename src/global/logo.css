@@ -1,0 +1,18 @@
+.logo {
+  height: calc(45 / 16 * 1rem);
+  width: calc(41 / 16 * 1rem);
+}
+
+.logo__body {
+  display: none;
+}
+
+@media (width >= 64rem) {
+  .logo {
+    width: calc(160 / 16 * 1rem);
+  }
+
+  .logo__body {
+    display: block;
+  }
+}

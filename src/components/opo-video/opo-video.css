@@ -1,0 +1,50 @@
+:host {
+  --opo-video-aspect-ratio: 16 / 9;
+
+  aspect-ratio: var(--opo-video-aspect-ratio);
+  background-color: var(--color-neutral-dark-05);
+  border-radius: 6px;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  color: var(--color-neutral-dark-20);
+  cursor: pointer;
+  display: grid;
+  inset: 0;
+  padding: 0;
+  place-content: center;
+  position: absolute;
+}
+
+.sr-only {
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+iframe {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+svg {
+  width: clamp(3rem, 1.5661764705882355rem + 6.372549019607843vw, 4.625rem);
+}

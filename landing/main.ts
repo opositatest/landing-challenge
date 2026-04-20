@@ -1,3 +1,16 @@
 import '../src/global/global.css';
-import './styles.css';
+import '../src/global/header.css';
+import '../src/global/logo.css';
+import '../src/global/avatar.css';
+import '../src/global/utilities.css';
+import '../src/global/link.css';
+import '../src/global/hero.css';
+import '../src/global/discount.css';
+import '../src/global/layout.css';
+import '../src/global/resources.css';
+import '../src/global/article.css';
+import '../src/global/benefits.css';
+import '../src/global/faq.css';
+import '../src/global/media.css';
+import '../src/global/footer.css';
 import '../dist/landing-challenge/landing-challenge.esm.js';

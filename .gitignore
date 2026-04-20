@@ -1,4 +1,7 @@
 dist/
+dist-landing/
+.vitest-attachments/
+**/__screenshots__/
 www/
 loader/
 storybook-static/
@@ -25,3 +28,4 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 .env
+EVALUACION_LIT.md

@@ -1,0 +1,118 @@
+.faq {
+  background-color: var(--color-neutral-blueish-white);
+
+  padding-bottom: calc(104 / 16 * 1rem);
+  padding-top: var(--spacing-desktop-xl);
+}
+
+.faq__title {
+  font-size: var(--font-size-desktop-xl);
+  font-weight: var(--font-weight-semibold);
+  grid-column: 1 / -1;
+  line-height: var(--font-line-height-desktop-xl);
+  text-align: center;
+}
+
+.faq__container {
+  grid-column: 1 / -1;
+  box-shadow: 0px 8px 24px 0px color-mix(in srgb, var(--color-neutral-dark-100) 10%, transparent);
+
+  @media (width >= 48rem) {
+    grid-column: 2 / -2;
+  }
+}
+
+.details-faq {
+  overflow: hidden;
+
+  &::details-content {
+    block-size: 0;
+    transition:
+      block-size 0.15s,
+      content-visibility 0.15s;
+    transition-behavior: allow-discrete;
+  }
+
+  &[open]::details-content {
+    block-size: auto;
+  }
+
+  &:not([open]) {
+    .details-faq__icon {
+      transform: scaleY(-1);
+    }
+
+    summary {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &:first-child {
+    summary {
+      border-radius: 6px 6px 0 0;
+    }
+  }
+
+  summary {
+    align-items: center;
+    background-color: var(--color-neutral-dark-05);
+    border-bottom: 1px solid var(--color-border-default);
+    cursor: pointer;
+    display: grid;
+    gap: var(--spacing-desktop-s);
+    grid-template-columns: auto 1fr auto;
+    padding: var(--spacing-desktop-s);
+    user-select: none;
+
+    &::before,
+    &::after {
+      content: '';
+      background-color: var(--color-primary-main);
+      border-radius: 2px;
+      display: block;
+    }
+
+    &::before {
+      height: 2px;
+      margin-inline: 3px;
+      width: 10px;
+    }
+
+    &::after {
+      height: 10px;
+      margin-left: 7px;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 0.15s;
+      width: 2px;
+    }
+
+    &::marker {
+      content: none;
+    }
+  }
+}
+
+.details-faq__content {
+  background-color: var(--color-surface-panel);
+  border-bottom: 1px solid var(--color-neutral-blueish-white);
+  padding: var(--spacing-desktop-s) var(--spacing-desktop-xxl);
+
+  strong {
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.details-faq__icon {
+  transition: transform 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .details-faq::details-content,
+  .details-faq summary::after,
+  .details-faq__icon {
+    transition: none;
+  }
+}

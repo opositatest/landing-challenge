@@ -1,89 +1,36 @@
-# Stencil Landing Challenge
+# Entrega — Stencil Landing Challenge
 
-Starter para una prueba técnica centrada en `Stencil`, `Web Components` y `Storybook`.
+[Demo en producción](https://test-one-black-13.vercel.app/)
 
-La base está preparada para que la persona candidata clone el repo, instale dependencias y empiece a trabajar sin perder tiempo en setup. El starter incluye un único componente de ejemplo, `opo-button`, y una landing externa separada de la librería.
+## Decisiones técnicas
 
-## Setup
+- **Shadow DOM por componente** para aislar estilos.
+- **Accesibilidad como requisito, no extra.** Uso consistente de `sr-only`, `aria-labelledby`, `aria-hidden` y gestión explícita del foco — por ejemplo, en `opo-video` el `<iframe>` recibe foco al pulsar play para que el lector de pantalla anuncie el `title`.
+- **Rendimiento en la build de la landing.** Plugin Vite propio (`landing/vite.config.ts`) que, en tiempo de build:
+  - Inyecta `<link rel="preload" as="font">` para las `.woff2` hasheadas.
+  - Inyecta en línea el CSS final dentro del `<head>` para eliminar el request render-blocking.
+- **Tipografías subsetadas** con `unicode-range` y `font-display: swap` para reducir el peso y evitar FOIT.
 
-```bash
-npm install
-npm start
-```
+## Tradeoffs
 
-Landing local:
+- `opo-icon`: Se buscan los iconos por clave (`icons[name]`), lo que impide el tree-shaking. El chunk de iconos pesa ~300KB raw (~115KB gzip) aunque la landing use solo una parte. Decidí dejarlo así porque las rutas en Storybook del asset generaba problemas. Con más tiempo buscaría una solución adecuada.
+- **CSS totalmente en línea.** Gana en renderizado (sin request bloqueante) pero pierde cacheado. Es el tradeoff correcto para una landing de una sola página.
+- **Preload de todas las fuentes.** Las cuatro variantes están above the fold según Lighthouse, así que las precargo todas.
+- **`font-display: swap`** asume que un breve FOUT es preferible a texto invisible — decisión consciente para priorizar LCP.
 
-`http://localhost:3333`
+## Accesibilidad
 
-Storybook:
+- El sitio ha sido testado con los lectores de pantalla NVDA, JAWS y TalkBack. Siendo este completamente navegable por los mismos junto al uso de teclado.
+- Se ha hecho uso de la extensión de Axe para Chrome para el análisis estático.
+- Se ha comprobado el funcionamiento del sitio acorde a la regla [reflow](https://www.w3.org/WAI/WCAG21/Understanding/reflow.html).
+- Se hace uso de la media query `prefers-reduced-motion` para eliminar transiciones que puedan ocasionar problemas a usuarios con sensibilidad motora.
 
-```bash
-npm run storybook
-```
+## Qué mejoraría con más tiempo
 
-Storybook local:
-
-`http://localhost:6006`
-
-## Objetivo de la prueba
-
-Construir una landing page usando `Stencil` y documentar los componentes en `Storybook`.
-
-La idea es que la pagina viva fuera de la librería de componentes, como ocurriría en una web consumidora del paquete.
-
-## Lo que ya viene hecho
-
-- Entorno base de Stencil listo para arrancar.
-- Landing externa inicial en `landing/`.
-- Un único componente de ejemplo: `opo-button`.
-- Storybook configurado para documentar componentes de la librería.
-
-El resto de componentes debe decidirlo y construirlo la persona candidata.
-
-## Como consume la landing la librería
-
-La landing no importa componentes uno a uno ni requiere tocar `package.json` cada vez que se añade uno nuevo.
-
-La web externa carga solo el bundle raíz de Stencil desde:
-
-`landing/main.ts`
-
-Ese bundle registra automáticamente los Web Components compilados por la librería, así que cualquier componente nuevo que se cree en `src/components/` pasa a estar disponible en la landing tras recompilar.
-
-## Requisitos esperados
-
-- Usar `Stencil` para construir componentes reutilizables.
-- Montar la landing desde la web externa, no desde un componente contenedor dentro de la librería.
-- Documentar en Storybook los componentes.
-- Organizar la solución con una jerarquía de componentes clara.
-
-## Se valorara especialmente
-
-- Reutilización real de componentes.
-- Jerarquía de componentes bien pensada.
-- Buen manejo de estados y variantes.
-- Calidad visual general.
-- Accesibilidad básica.
-- Uso de CSS variables o un sistema visual consistente.
-
-## Bonus
-
-- Mejoras de accesibilidad.
-- Mejor documentación en Storybook.
-- Theming mediante variables CSS.
-- Tests básicos de componentes.
-
-## Entrega
-
-- Sube tus cambios al repositorio o comparte un enlace con tu solución.
-- Incluye una breve explicación:
-  - decisiones técnicas
-  - tradeoffs
-  - qué mejorarías con más tiempo
-
-## Nota para evaluación
-
-La estructura actual está pensada para que la landing y la librería convivan en el mismo repo, pero separadas:
-
-- `npm start` levanta una landing externa en Vite y recompila la librería de Stencil en paralelo.
-- `npm run storybook` levanta Storybook y recompila Stencil en paralelo para reflejar cambios en componentes.
+- **SVG `opo-icon`**: Es la mayor oportunidad de mejora de rendimiento que queda.
+- **Crear más componentes** acorde a las necesidades.
+- **Arquitectura CSS**: aplicar una arquitectura, crear custom properties agnósticas, usando nuevas y soportadas funcionalidades como uso de `OKLCH()`, `clamp()` para reducir media queries, uso de container queries, `@layer` etc.
+- **Auditoría Lighthouse en CI** para detectar regresiones de performance en PRs.
+- **Añadir tests de accesibilidad automatizados**.
+- Reunirme con diseño para establecer soluciones a problemas, retos o inconsistencias encontradas a nivel layout y de accesibilidad.
+- Comprobar el sitio usando VoiceOver en macOS e iOS.

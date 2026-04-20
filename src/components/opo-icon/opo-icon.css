@@ -1,0 +1,9 @@
+opo-icon {
+  display: block;
+}
+
+opo-icon svg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}

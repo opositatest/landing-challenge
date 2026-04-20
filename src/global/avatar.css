@@ -1,0 +1,7 @@
+.avatar {
+  display: none;
+
+  @media (width >= 80rem) {
+    display: block;
+  }
+}

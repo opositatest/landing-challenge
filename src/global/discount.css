@@ -1,0 +1,90 @@
+.discount {
+  font-family: var(--font-family-secondary);
+  padding-top: var(--spacing-desktop-md);
+  position: relative;
+}
+
+.discount__start {
+  --font-size-min: calc(44 / 16 * 1rem);
+  --font-size-max: calc(60 / 16 * 1rem);
+
+  font-size: clamp(2.75rem, 1.8676470588235294rem + 3.9215686274509802vw, 3.75rem);
+  line-height: 1;
+  position: relative;
+
+  @media (width >= 48rem) {
+    padding-left: var(--spacing-desktop-xl);
+  }
+}
+
+.discount__amount-container {
+  display: grid;
+  grid-template-areas: 'stack';
+  position: relative;
+}
+
+.discount__amount {
+  --font-size-min: calc(172 / 16 * 1rem);
+  --font-size-max: calc(230 / 16 * 1rem);
+
+  display: inline-block;
+  grid-area: stack;
+  font-size: clamp(var(--font-size-min), 7.551470588235294rem + 14.215686274509803vw, var(--font-size-max));
+  line-height: 1;
+  padding-left: var(--spacing-desktop-s);
+  position: relative;
+  rotate: 1.26deg;
+}
+
+.discount__end {
+  --font-size-min: calc(30 / 16 * 1rem);
+  --font-size-max: calc(40 / 16 * 1rem);
+
+  display: inline-block;
+  font-size: clamp(var(--font-size-min), 1.3235294117647058rem + 2.450980392156863vw, var(--font-size-max));
+  line-height: calc(48 / 40);
+  rotate: -1.18deg;
+}
+
+.discount__thunder {
+  position: absolute;
+  right: 7%;
+  top: 0;
+}
+
+.discount__splash {
+  bottom: var(--spacing-desktop-s);
+  position: absolute;
+  right: 0;
+  top: 26%;
+}
+
+.discount__underline {
+  align-self: end;
+  bottom: -8%;
+  color: var(--color-action-primary);
+  grid-area: stack;
+  position: relative;
+}
+
+.discount__end-container {
+  display: flex;
+  gap: var(--spacing-desktop-xs);
+  padding-left: 15%;
+
+  &::before {
+    content: '';
+    left: 23%;
+    width: 55%;
+    position: absolute;
+    border-left: 1px solid var(--color-neutral-black);
+    border-right: 1px solid var(--color-neutral-black);
+    border-bottom: 1px solid var(--color-neutral-black);
+    height: calc(35 / 16 * 1rem);
+  }
+}
+
+.discount__arrow {
+  margin-top: var(--spacing-desktop-xs);
+  position: relative;
+}

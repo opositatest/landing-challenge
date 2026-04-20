@@ -1,0 +1,108 @@
+.hero {
+  --header-img: 40px;
+
+  color: var(--color-text-inverse);
+
+  &::after {
+    content: '';
+    display: block;
+    aspect-ratio: 720 / 71;
+    background-image: url('/assets/img/break.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+.hero__container {
+  --width: 1440;
+  --hero-padding-inline: 168;
+
+  align-items: center;
+  display: grid;
+  gap: var(--spacing-desktop-md);
+
+  overflow: hidden;
+  padding-inline: var(--spacing-desktop-xs);
+  padding-top: calc(var(--spacing-desktop-xs) * 2 + var(--header-img) + 72px);
+  padding-bottom: var(--spacing-desktop-xl);
+  position: relative;
+
+  @media (width >= 48rem) {
+    grid-template-columns: 490fr 582fr;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: calc(var(--hero-padding-inline) / var(--width) * 100vw);
+  }
+}
+
+.hero__bg {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.hero__time {
+  color: var(--color-action-primary);
+  display: inline-block;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-desktop-l);
+
+  & + * {
+    margin-top: var(--spacing-desktop-xs);
+  }
+}
+
+.hero__title {
+  --font-size-min: calc(48 / 16 * 1rem);
+  --font-size-max: calc(62 / 16 * 1rem);
+
+  color: var(--color-action-primary);
+  font-size: clamp(var(--font-size-min), 1.9926470588235294rem + 3.9215686274509802vw, var(--font-size-max));
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  text-wrap: auto;
+
+  & + * {
+    margin-top: var(--spacing-desktop-s);
+  }
+}
+
+.hero__p {
+  line-height: var(--font-line-height-desktop-l);
+
+  & + * {
+    margin-top: var(--spacing-desktop-l);
+  }
+}
+
+.hero__p--extra {
+  line-height: var(--font-line-height-desktop-xl);
+}
+
+.hero__link {
+  color: inherit;
+}
+
+.hero__col {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__left {
+  font-size: var(--font-size-desktop-l);
+}
+
+.hero__right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-desktop-s);
+}
+
+.hero__splash {
+  bottom: 0;
+  position: absolute;
+}
