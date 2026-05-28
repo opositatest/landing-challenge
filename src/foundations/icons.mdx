@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { uiIconNames } from './tokens-data';
+
+<Meta title="Foundations/Icons/UI" parameters={{ viewport: { disable: true } }} />
+
+<div className="style-guide-stories icons-stories">
+	<header>
+		<h1>UI Icons</h1>
+		<div>
+Galería de todos los iconos de interfaz (UI) disponibles en <span className='code-inline'>src/components/opo-icon/raw-icons/ui.</span>Utiliza estos nombres mediante la prop <em>name</em> del componente <span className='code-inline'>opo-icon</span>.
+    	</div>
+    </header>
+
+    <section>
+    	<h2 id="ui-icons">UI icons ({uiIconNames.length})</h2>
+
+        <div className="docs-token-grid icon-palette" style={{ '--docs-token-grid-min': '9rem' }}>
+    		{uiIconNames.map((name) => (
+    			<div key={name} className="docs-token-card">
+    				<div className="docs-token-surface" style={{transform: 'translateY(3px)'}}>
+    					<opo-icon name={name} size="lg" aria-label={name} />
+    				</div>
+
+    				<div className="docs-token-card-caption" style={{ alignItems: 'center' }}>
+    					<div className="docs-token-label">name</div>
+    					<div className="docs-token-value">{name}</div>
+    				</div>
+    			</div>
+    		))}
+    	</div>
+    </section>
+
+</div>

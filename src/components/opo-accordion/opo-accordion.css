@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+:host([full-width]) {
+  inline-size: 100%;
+}
+
+.opo-accordion {
+  --opo-accordion-shadow: var(--ref-shadow-lg);
+  --opo-accordion-border-color: var(--sys-color-border-soft);
+  --opo-accordion-radius: var(--ref-radius-xs);
+
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--sys-container-md);
+  border-radius: var(--opo-accordion-radius);
+  overflow: hidden;
+}
+
+.opo-accordion--full-width {
+  inline-size: 100%;
+  max-inline-size: none;
+}
+
+.opo-accordion--default {
+  box-shadow: var(--opo-accordion-shadow);
+}
+
+.opo-accordion--outlined {
+  border: 1px solid var(--opo-accordion-border-color);
+  border-block-end: 0;
+  box-shadow: none;
+}
+
+.opo-accordion--outlined::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  block-size: 1px;
+  background: var(--opo-accordion-border-color);
+  pointer-events: none;
+}

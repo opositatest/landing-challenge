@@ -6,70 +6,774 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface OpoButton {
+    interface OpoAccordion {
         /**
+          * Allows closing the currently open item in single mode.
+          * @default true
+         */
+        "collapsible": boolean;
+        /**
+          * Initial open value. Space-separated when type="multiple".
+         */
+        "defaultValue"?: string;
+        /**
+          * Makes the accordion take the full available width.
+          * @default false
+         */
+        "fullWidth": boolean;
+        "isItemOpen": (value: string) => Promise<boolean>;
+        "toggleItem": (value: string) => Promise<void>;
+        /**
+          * Selection behavior.
+          * @default "multiple"
+         */
+        "type": "single" | "multiple";
+        /**
+          * Controlled open value. Space-separated when type="multiple".
+         */
+        "value"?: string;
+        /**
+          * Visual style of the accordion.
+          * @default "default"
+         */
+        "variant": "default" | "outlined";
+    }
+    interface OpoAccordionItem {
+        /**
+          * Disables the item interaction.
           * @default false
          */
         "disabled": boolean;
         /**
-          * @default 'primary'
+          * Semantic heading level. Visual style remains unchanged.
+          * @default 3
          */
-        "variant": 'primary' | 'secondary';
+        "headingLevel": 2 | 3 | 4 | 5 | 6;
+        /**
+          * Visible trigger label.
+         */
+        "label": string;
+        /**
+          * Unique item value used by the parent accordion.
+         */
+        "value": string;
+    }
+    interface OpoAvatar {
+        /**
+          * Accessible image description. Use an empty string when the avatar is decorative or when the name is already visible nearby.
+          * @default ""
+         */
+        "alt": string;
+        /**
+          * Fallback color treatment.
+          * @default "neutral"
+         */
+        "color": "neutral" | "brand";
+        /**
+          * Fallback text, usually initials.
+         */
+        "fallback"?: string;
+        /**
+          * Fallback icon name used when there is no image or text fallback.
+          * @default "user"
+         */
+        "fallbackIcon": string;
+        /**
+          * Visual size of the avatar.
+          * @default "md"
+         */
+        "size": "sm" | "md" | "lg";
+        /**
+          * Image source.
+         */
+        "src"?: string;
+    }
+    interface OpoButton {
+        /**
+          * Accessible label. Required when the button has no visible text, eg: icon-only buttons.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Disables the button.
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Makes the button take the full available width.
+          * @default false
+         */
+        "fullWidth": boolean;
+        /**
+          * Renders the button as an icon-only button.
+          * @default false
+         */
+        "iconOnly": boolean;
+        /**
+          * Shows a loading state and prevents interaction.
+          * @default false
+         */
+        "loading": boolean;
+        /**
+          * Visual size of the button.
+          * @default "md"
+         */
+        "size": "sm" | "md" | "lg";
+        /**
+          * Native button type.
+          * @default "button"
+         */
+        "type": "button" | "submit" | "reset";
+        /**
+          * Visual style of the button.
+          * @default "primary"
+         */
+        "variant": "primary" | "secondary" | "ghost" | "destructive";
+    }
+    interface OpoCard {
+        /**
+          * Semantic root element.
+          * @default "div"
+         */
+        "as": "div" | "article" | "section";
+        /**
+          * Makes the card take the full available width.
+          * @default false
+         */
+        "fullWidth": boolean;
+        /**
+          * Makes the card visually interactive. Does not add navigation or action semantics by itself.
+          * @default false
+         */
+        "interactive": boolean;
+        /**
+          * Internal spacing density.
+          * @default "md"
+         */
+        "size": "sm" | "md" | "lg";
+        /**
+          * Visual style of the card.
+          * @default "default"
+         */
+        "variant": "default" | "outlined" | "elevated";
+    }
+    interface OpoIcon {
+        /**
+          * Accessible label for meaningful icons.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Semantic color of the icon.
+         */
+        "color"?: "primary" | "secondary" | "success" | "danger" | "warning";
+        /**
+          * Icon name from the SVG sprite.
+         */
+        "name"?: string;
+        /**
+          * Visual size of the icon.
+          * @default "md"
+         */
+        "size": "sm" | "md" | "lg";
+        /**
+          * Applies a continuous spinning animation.
+          * @default false
+         */
+        "spinning": boolean;
+        /**
+          * Custom path to the SVG sprite file.
+          * @default "/icons/opo-sprite.svg"
+         */
+        "spriteUrl": string;
+    }
+    interface OpoLink {
+        /**
+          * Accessible label when the visible text is not descriptive enough.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Disables navigation and renders a non-interactive element. Since <a> does not support the native disabled attribute, the component renders a semantic fallback element instead.
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * Prompts the browser to download the linked resource.
+         */
+        "download"?: boolean | string;
+        /**
+          * URL that the link points to.
+         */
+        "href"?: string;
+        /**
+          * Layout orientation of the link content.
+          * @default "horizontal"
+         */
+        "orientation": "horizontal" | "vertical";
+        /**
+          * Referrer policy for the request.
+         */
+        "referrerPolicy"?: | "no-referrer"
+    | "no-referrer-when-downgrade"
+    | "origin"
+    | "origin-when-cross-origin"
+    | "same-origin"
+    | "strict-origin"
+    | "strict-origin-when-cross-origin"
+    | "unsafe-url";
+        /**
+          * Relationship between the current document and the linked document.
+         */
+        "rel"?: string;
+        /**
+          * Static color for links displayed on fixed dark/light backgrounds.
+         */
+        "staticColor"?: "white" | "black";
+        /**
+          * Where to open the linked document.
+         */
+        "target"?: "_blank" | "_self" | "_parent" | "_top";
+        /**
+          * Underline behavior of the link.
+          * @default "default"
+         */
+        "underline": "default" | "none" | "reveal";
+        /**
+          * Visual style of the link.
+          * @default "primary"
+         */
+        "variant": "primary" | "secondary";
+    }
+    interface OpoPromoCard {
+        /**
+          * Supporting text displayed below the heading.
+         */
+        "description"?: string;
+        /**
+          * Makes the card take the full available width.
+          * @default false
+         */
+        "fullWidth": boolean;
+        /**
+          * Main heading displayed in the card header.
+         */
+        "heading": string;
+        /**
+          * Semantic heading level. Visual style remains unchanged.
+          * @default 3
+         */
+        "headingLevel": 2 | 3 | 4 | 5 | 6;
+        /**
+          * Accessible image alternative text.  Defaults to an empty string because promo images are usually decorative when the meaningful information is already provided by the heading, description and action.
+          * @default ""
+         */
+        "imageAlt": string;
+        /**
+          * Image source used in the media area.
+         */
+        "imageSrc": string;
+        /**
+          * Defines how the card participates in external layouts.  - standalone: default isolated layout - subgrid: enables synchronized row alignment inside parent subgrids
+          * @default "standalone"
+         */
+        "layout": "standalone" | "subgrid";
+        /**
+          * Shows a non-interactive pending state instead of the action slot.
+          * @default false
+         */
+        "pending": boolean;
+        /**
+          * Text displayed when the card is in pending state.
+          * @default "Próximamente"
+         */
+        "pendingLabel": string;
+    }
+    interface OpoSpinner {
+        /**
+          * @default "md"
+         */
+        "size": "sm" | "md" | "lg";
     }
 }
-export interface OpoButtonCustomEvent<T> extends CustomEvent<T> {
+export interface OpoAccordionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLOpoButtonElement;
+    target: HTMLOpoAccordionElement;
 }
 declare global {
-    interface HTMLOpoButtonElementEventMap {
-        "opoClick": void;
+    interface HTMLOpoAccordionElementEventMap {
+        "opoChange": string | string[] | undefined;
     }
-    interface HTMLOpoButtonElement extends Components.OpoButton, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLOpoButtonElementEventMap>(type: K, listener: (this: HTMLOpoButtonElement, ev: OpoButtonCustomEvent<HTMLOpoButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLOpoAccordionElement extends Components.OpoAccordion, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLOpoAccordionElementEventMap>(type: K, listener: (this: HTMLOpoAccordionElement, ev: OpoAccordionCustomEvent<HTMLOpoAccordionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLOpoButtonElementEventMap>(type: K, listener: (this: HTMLOpoButtonElement, ev: OpoButtonCustomEvent<HTMLOpoButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLOpoAccordionElementEventMap>(type: K, listener: (this: HTMLOpoAccordionElement, ev: OpoAccordionCustomEvent<HTMLOpoAccordionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLOpoAccordionElement: {
+        prototype: HTMLOpoAccordionElement;
+        new (): HTMLOpoAccordionElement;
+    };
+    interface HTMLOpoAccordionItemElement extends Components.OpoAccordionItem, HTMLStencilElement {
+    }
+    var HTMLOpoAccordionItemElement: {
+        prototype: HTMLOpoAccordionItemElement;
+        new (): HTMLOpoAccordionItemElement;
+    };
+    interface HTMLOpoAvatarElement extends Components.OpoAvatar, HTMLStencilElement {
+    }
+    var HTMLOpoAvatarElement: {
+        prototype: HTMLOpoAvatarElement;
+        new (): HTMLOpoAvatarElement;
+    };
+    interface HTMLOpoButtonElement extends Components.OpoButton, HTMLStencilElement {
     }
     var HTMLOpoButtonElement: {
         prototype: HTMLOpoButtonElement;
         new (): HTMLOpoButtonElement;
     };
+    interface HTMLOpoCardElement extends Components.OpoCard, HTMLStencilElement {
+    }
+    var HTMLOpoCardElement: {
+        prototype: HTMLOpoCardElement;
+        new (): HTMLOpoCardElement;
+    };
+    interface HTMLOpoIconElement extends Components.OpoIcon, HTMLStencilElement {
+    }
+    var HTMLOpoIconElement: {
+        prototype: HTMLOpoIconElement;
+        new (): HTMLOpoIconElement;
+    };
+    interface HTMLOpoLinkElement extends Components.OpoLink, HTMLStencilElement {
+    }
+    var HTMLOpoLinkElement: {
+        prototype: HTMLOpoLinkElement;
+        new (): HTMLOpoLinkElement;
+    };
+    interface HTMLOpoPromoCardElement extends Components.OpoPromoCard, HTMLStencilElement {
+    }
+    var HTMLOpoPromoCardElement: {
+        prototype: HTMLOpoPromoCardElement;
+        new (): HTMLOpoPromoCardElement;
+    };
+    interface HTMLOpoSpinnerElement extends Components.OpoSpinner, HTMLStencilElement {
+    }
+    var HTMLOpoSpinnerElement: {
+        prototype: HTMLOpoSpinnerElement;
+        new (): HTMLOpoSpinnerElement;
+    };
     interface HTMLElementTagNameMap {
+        "opo-accordion": HTMLOpoAccordionElement;
+        "opo-accordion-item": HTMLOpoAccordionItemElement;
+        "opo-avatar": HTMLOpoAvatarElement;
         "opo-button": HTMLOpoButtonElement;
+        "opo-card": HTMLOpoCardElement;
+        "opo-icon": HTMLOpoIconElement;
+        "opo-link": HTMLOpoLinkElement;
+        "opo-promo-card": HTMLOpoPromoCardElement;
+        "opo-spinner": HTMLOpoSpinnerElement;
     }
 }
 declare namespace LocalJSX {
-    interface OpoButton {
+    type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}` | `prop:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K | `prop:${K}`]?: never } | { [P in `prop:${K}`]: PropT } & { [P in K | `attr:${K}`]?: never };
+
+    interface OpoAccordion {
         /**
+          * Allows closing the currently open item in single mode.
+          * @default true
+         */
+        "collapsible"?: boolean;
+        /**
+          * Initial open value. Space-separated when type="multiple".
+         */
+        "defaultValue"?: string;
+        /**
+          * Makes the accordion take the full available width.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * Emitted when the open value changes.
+         */
+        "onOpoChange"?: (event: OpoAccordionCustomEvent<string | string[] | undefined>) => void;
+        /**
+          * Selection behavior.
+          * @default "multiple"
+         */
+        "type"?: "single" | "multiple";
+        /**
+          * Controlled open value. Space-separated when type="multiple".
+         */
+        "value"?: string;
+        /**
+          * Visual style of the accordion.
+          * @default "default"
+         */
+        "variant"?: "default" | "outlined";
+    }
+    interface OpoAccordionItem {
+        /**
+          * Disables the item interaction.
           * @default false
          */
         "disabled"?: boolean;
-        "onOpoClick"?: (event: OpoButtonCustomEvent<void>) => void;
         /**
-          * @default 'primary'
+          * Semantic heading level. Visual style remains unchanged.
+          * @default 3
          */
-        "variant"?: 'primary' | 'secondary';
+        "headingLevel"?: 2 | 3 | 4 | 5 | 6;
+        /**
+          * Visible trigger label.
+         */
+        "label": string;
+        /**
+          * Unique item value used by the parent accordion.
+         */
+        "value": string;
+    }
+    interface OpoAvatar {
+        /**
+          * Accessible image description. Use an empty string when the avatar is decorative or when the name is already visible nearby.
+          * @default ""
+         */
+        "alt"?: string;
+        /**
+          * Fallback color treatment.
+          * @default "neutral"
+         */
+        "color"?: "neutral" | "brand";
+        /**
+          * Fallback text, usually initials.
+         */
+        "fallback"?: string;
+        /**
+          * Fallback icon name used when there is no image or text fallback.
+          * @default "user"
+         */
+        "fallbackIcon"?: string;
+        /**
+          * Visual size of the avatar.
+          * @default "md"
+         */
+        "size"?: "sm" | "md" | "lg";
+        /**
+          * Image source.
+         */
+        "src"?: string;
+    }
+    interface OpoButton {
+        /**
+          * Accessible label. Required when the button has no visible text, eg: icon-only buttons.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Disables the button.
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Makes the button take the full available width.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * Renders the button as an icon-only button.
+          * @default false
+         */
+        "iconOnly"?: boolean;
+        /**
+          * Shows a loading state and prevents interaction.
+          * @default false
+         */
+        "loading"?: boolean;
+        /**
+          * Visual size of the button.
+          * @default "md"
+         */
+        "size"?: "sm" | "md" | "lg";
+        /**
+          * Native button type.
+          * @default "button"
+         */
+        "type"?: "button" | "submit" | "reset";
+        /**
+          * Visual style of the button.
+          * @default "primary"
+         */
+        "variant"?: "primary" | "secondary" | "ghost" | "destructive";
+    }
+    interface OpoCard {
+        /**
+          * Semantic root element.
+          * @default "div"
+         */
+        "as"?: "div" | "article" | "section";
+        /**
+          * Makes the card take the full available width.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * Makes the card visually interactive. Does not add navigation or action semantics by itself.
+          * @default false
+         */
+        "interactive"?: boolean;
+        /**
+          * Internal spacing density.
+          * @default "md"
+         */
+        "size"?: "sm" | "md" | "lg";
+        /**
+          * Visual style of the card.
+          * @default "default"
+         */
+        "variant"?: "default" | "outlined" | "elevated";
+    }
+    interface OpoIcon {
+        /**
+          * Accessible label for meaningful icons.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Semantic color of the icon.
+         */
+        "color"?: "primary" | "secondary" | "success" | "danger" | "warning";
+        /**
+          * Icon name from the SVG sprite.
+         */
+        "name"?: string;
+        /**
+          * Visual size of the icon.
+          * @default "md"
+         */
+        "size"?: "sm" | "md" | "lg";
+        /**
+          * Applies a continuous spinning animation.
+          * @default false
+         */
+        "spinning"?: boolean;
+        /**
+          * Custom path to the SVG sprite file.
+          * @default "/icons/opo-sprite.svg"
+         */
+        "spriteUrl"?: string;
+    }
+    interface OpoLink {
+        /**
+          * Accessible label when the visible text is not descriptive enough.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Disables navigation and renders a non-interactive element. Since <a> does not support the native disabled attribute, the component renders a semantic fallback element instead.
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * Prompts the browser to download the linked resource.
+         */
+        "download"?: boolean | string;
+        /**
+          * URL that the link points to.
+         */
+        "href"?: string;
+        /**
+          * Layout orientation of the link content.
+          * @default "horizontal"
+         */
+        "orientation"?: "horizontal" | "vertical";
+        /**
+          * Referrer policy for the request.
+         */
+        "referrerPolicy"?: | "no-referrer"
+    | "no-referrer-when-downgrade"
+    | "origin"
+    | "origin-when-cross-origin"
+    | "same-origin"
+    | "strict-origin"
+    | "strict-origin-when-cross-origin"
+    | "unsafe-url";
+        /**
+          * Relationship between the current document and the linked document.
+         */
+        "rel"?: string;
+        /**
+          * Static color for links displayed on fixed dark/light backgrounds.
+         */
+        "staticColor"?: "white" | "black";
+        /**
+          * Where to open the linked document.
+         */
+        "target"?: "_blank" | "_self" | "_parent" | "_top";
+        /**
+          * Underline behavior of the link.
+          * @default "default"
+         */
+        "underline"?: "default" | "none" | "reveal";
+        /**
+          * Visual style of the link.
+          * @default "primary"
+         */
+        "variant"?: "primary" | "secondary";
+    }
+    interface OpoPromoCard {
+        /**
+          * Supporting text displayed below the heading.
+         */
+        "description"?: string;
+        /**
+          * Makes the card take the full available width.
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * Main heading displayed in the card header.
+         */
+        "heading": string;
+        /**
+          * Semantic heading level. Visual style remains unchanged.
+          * @default 3
+         */
+        "headingLevel"?: 2 | 3 | 4 | 5 | 6;
+        /**
+          * Accessible image alternative text.  Defaults to an empty string because promo images are usually decorative when the meaningful information is already provided by the heading, description and action.
+          * @default ""
+         */
+        "imageAlt"?: string;
+        /**
+          * Image source used in the media area.
+         */
+        "imageSrc": string;
+        /**
+          * Defines how the card participates in external layouts.  - standalone: default isolated layout - subgrid: enables synchronized row alignment inside parent subgrids
+          * @default "standalone"
+         */
+        "layout"?: "standalone" | "subgrid";
+        /**
+          * Shows a non-interactive pending state instead of the action slot.
+          * @default false
+         */
+        "pending"?: boolean;
+        /**
+          * Text displayed when the card is in pending state.
+          * @default "Próximamente"
+         */
+        "pendingLabel"?: string;
+    }
+    interface OpoSpinner {
+        /**
+          * @default "md"
+         */
+        "size"?: "sm" | "md" | "lg";
     }
 
-    interface OpoButtonAttributes {
-        "variant": 'primary' | 'secondary';
+    interface OpoAccordionAttributes {
+        "type": "single" | "multiple";
+        "value": string;
+        "defaultValue": string;
+        "variant": "default" | "outlined";
+        "collapsible": boolean;
+        "fullWidth": boolean;
+    }
+    interface OpoAccordionItemAttributes {
+        "value": string;
+        "label": string;
+        "headingLevel": 2 | 3 | 4 | 5 | 6;
         "disabled": boolean;
+    }
+    interface OpoAvatarAttributes {
+        "src": string;
+        "alt": string;
+        "fallback": string;
+        "fallbackIcon": string;
+        "size": "sm" | "md" | "lg";
+        "color": "neutral" | "brand";
+    }
+    interface OpoButtonAttributes {
+        "variant": "primary" | "secondary" | "ghost" | "destructive";
+        "size": "sm" | "md" | "lg";
+        "iconOnly": boolean;
+        "fullWidth": boolean;
+        "loading": boolean;
+        "disabled": boolean;
+        "ariaLabel": string;
+        "type": "button" | "submit" | "reset";
+    }
+    interface OpoCardAttributes {
+        "as": "div" | "article" | "section";
+        "variant": "default" | "outlined" | "elevated";
+        "size": "sm" | "md" | "lg";
+        "fullWidth": boolean;
+        "interactive": boolean;
+    }
+    interface OpoIconAttributes {
+        "name": string;
+        "size": "sm" | "md" | "lg";
+        "color": "primary" | "secondary" | "success" | "danger" | "warning";
+        "spinning": boolean;
+        "ariaLabel": string;
+        "spriteUrl": string;
+    }
+    interface OpoLinkAttributes {
+        "href": string;
+        "variant": "primary" | "secondary";
+        "underline": "default" | "none" | "reveal";
+        "orientation": "horizontal" | "vertical";
+        "disabled": boolean;
+        "staticColor": "white" | "black";
+        "target": "_blank" | "_self" | "_parent" | "_top";
+        "rel": string;
+        "download": string;
+        "referrerPolicy": | "no-referrer"
+    | "no-referrer-when-downgrade"
+    | "origin"
+    | "origin-when-cross-origin"
+    | "same-origin"
+    | "strict-origin"
+    | "strict-origin-when-cross-origin"
+    | "unsafe-url";
+        "ariaLabel": string;
+    }
+    interface OpoPromoCardAttributes {
+        "heading": string;
+        "description": string;
+        "imageSrc": string;
+        "imageAlt": string;
+        "headingLevel": 2 | 3 | 4 | 5 | 6;
+        "fullWidth": boolean;
+        "layout": "standalone" | "subgrid";
+        "pending": boolean;
+        "pendingLabel": string;
+    }
+    interface OpoSpinnerAttributes {
+        "size": "sm" | "md" | "lg";
     }
 
     interface IntrinsicElements {
+        "opo-accordion": Omit<OpoAccordion, keyof OpoAccordionAttributes> & { [K in keyof OpoAccordion & keyof OpoAccordionAttributes]?: OpoAccordion[K] } & { [K in keyof OpoAccordion & keyof OpoAccordionAttributes as `attr:${K}`]?: OpoAccordionAttributes[K] } & { [K in keyof OpoAccordion & keyof OpoAccordionAttributes as `prop:${K}`]?: OpoAccordion[K] };
+        "opo-accordion-item": Omit<OpoAccordionItem, keyof OpoAccordionItemAttributes> & { [K in keyof OpoAccordionItem & keyof OpoAccordionItemAttributes]?: OpoAccordionItem[K] } & { [K in keyof OpoAccordionItem & keyof OpoAccordionItemAttributes as `attr:${K}`]?: OpoAccordionItemAttributes[K] } & { [K in keyof OpoAccordionItem & keyof OpoAccordionItemAttributes as `prop:${K}`]?: OpoAccordionItem[K] } & OneOf<"value", OpoAccordionItem["value"], OpoAccordionItemAttributes["value"]> & OneOf<"label", OpoAccordionItem["label"], OpoAccordionItemAttributes["label"]>;
+        "opo-avatar": Omit<OpoAvatar, keyof OpoAvatarAttributes> & { [K in keyof OpoAvatar & keyof OpoAvatarAttributes]?: OpoAvatar[K] } & { [K in keyof OpoAvatar & keyof OpoAvatarAttributes as `attr:${K}`]?: OpoAvatarAttributes[K] } & { [K in keyof OpoAvatar & keyof OpoAvatarAttributes as `prop:${K}`]?: OpoAvatar[K] };
         "opo-button": Omit<OpoButton, keyof OpoButtonAttributes> & { [K in keyof OpoButton & keyof OpoButtonAttributes]?: OpoButton[K] } & { [K in keyof OpoButton & keyof OpoButtonAttributes as `attr:${K}`]?: OpoButtonAttributes[K] } & { [K in keyof OpoButton & keyof OpoButtonAttributes as `prop:${K}`]?: OpoButton[K] };
+        "opo-card": Omit<OpoCard, keyof OpoCardAttributes> & { [K in keyof OpoCard & keyof OpoCardAttributes]?: OpoCard[K] } & { [K in keyof OpoCard & keyof OpoCardAttributes as `attr:${K}`]?: OpoCardAttributes[K] } & { [K in keyof OpoCard & keyof OpoCardAttributes as `prop:${K}`]?: OpoCard[K] };
+        "opo-icon": Omit<OpoIcon, keyof OpoIconAttributes> & { [K in keyof OpoIcon & keyof OpoIconAttributes]?: OpoIcon[K] } & { [K in keyof OpoIcon & keyof OpoIconAttributes as `attr:${K}`]?: OpoIconAttributes[K] } & { [K in keyof OpoIcon & keyof OpoIconAttributes as `prop:${K}`]?: OpoIcon[K] };
+        "opo-link": Omit<OpoLink, keyof OpoLinkAttributes> & { [K in keyof OpoLink & keyof OpoLinkAttributes]?: OpoLink[K] } & { [K in keyof OpoLink & keyof OpoLinkAttributes as `attr:${K}`]?: OpoLinkAttributes[K] } & { [K in keyof OpoLink & keyof OpoLinkAttributes as `prop:${K}`]?: OpoLink[K] };
+        "opo-promo-card": Omit<OpoPromoCard, keyof OpoPromoCardAttributes> & { [K in keyof OpoPromoCard & keyof OpoPromoCardAttributes]?: OpoPromoCard[K] } & { [K in keyof OpoPromoCard & keyof OpoPromoCardAttributes as `attr:${K}`]?: OpoPromoCardAttributes[K] } & { [K in keyof OpoPromoCard & keyof OpoPromoCardAttributes as `prop:${K}`]?: OpoPromoCard[K] } & OneOf<"heading", OpoPromoCard["heading"], OpoPromoCardAttributes["heading"]> & OneOf<"imageSrc", OpoPromoCard["imageSrc"], OpoPromoCardAttributes["imageSrc"]>;
+        "opo-spinner": Omit<OpoSpinner, keyof OpoSpinnerAttributes> & { [K in keyof OpoSpinner & keyof OpoSpinnerAttributes]?: OpoSpinner[K] } & { [K in keyof OpoSpinner & keyof OpoSpinnerAttributes as `attr:${K}`]?: OpoSpinnerAttributes[K] } & { [K in keyof OpoSpinner & keyof OpoSpinnerAttributes as `prop:${K}`]?: OpoSpinner[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "opo-accordion": LocalJSX.IntrinsicElements["opo-accordion"] & JSXBase.HTMLAttributes<HTMLOpoAccordionElement>;
+            "opo-accordion-item": LocalJSX.IntrinsicElements["opo-accordion-item"] & JSXBase.HTMLAttributes<HTMLOpoAccordionItemElement>;
+            "opo-avatar": LocalJSX.IntrinsicElements["opo-avatar"] & JSXBase.HTMLAttributes<HTMLOpoAvatarElement>;
             "opo-button": LocalJSX.IntrinsicElements["opo-button"] & JSXBase.HTMLAttributes<HTMLOpoButtonElement>;
+            "opo-card": LocalJSX.IntrinsicElements["opo-card"] & JSXBase.HTMLAttributes<HTMLOpoCardElement>;
+            "opo-icon": LocalJSX.IntrinsicElements["opo-icon"] & JSXBase.HTMLAttributes<HTMLOpoIconElement>;
+            "opo-link": LocalJSX.IntrinsicElements["opo-link"] & JSXBase.HTMLAttributes<HTMLOpoLinkElement>;
+            "opo-promo-card": LocalJSX.IntrinsicElements["opo-promo-card"] & JSXBase.HTMLAttributes<HTMLOpoPromoCardElement>;
+            "opo-spinner": LocalJSX.IntrinsicElements["opo-spinner"] & JSXBase.HTMLAttributes<HTMLOpoSpinnerElement>;
         }
     }
 }

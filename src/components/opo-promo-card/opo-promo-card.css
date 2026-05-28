@@ -1,0 +1,131 @@
+:host {
+  /* Por defecto actúa como un bloque normal en la librería */
+  display: block;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+.opo-promo-card {
+  --opo-promo-card-inline-size: 100%;
+  --opo-promo-card-max-inline-size: var(--sys-container-sm);
+  --opo-promo-card-title-description-gap: var(--sys-space-sm); /* 16px */
+  --opo-promo-card-header-media-gap: var(--sys-space-lg); /* 32px */
+  --opo-promo-card-media-action-gap: var(--sys-space-md); /* 24px */
+  --opo-promo-card-media-max-inline-size: 100%;
+  --opo-promo-card-media-aspect-ratio: 492 / 340;/* 1.45:1 */
+  --opo-promo-card-image-radius: var(--ref-radius-xs); /* 6px */
+  --opo-promo-card-action-min-block-size: 3rem; /* 48px */
+  --opo-promo-card-title-color: var(--ref-color-zinc-900); /* #383641 */
+  --opo-promo-card-description-color: var(--ref-color-zinc-600); /* #88868d */
+  --opo-promo-card-pending-color: var(--ref-color-zinc-600); /* #88868d */
+
+  /* Base behavior ideal for any context in the library */
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--opo-promo-card-inline-size);
+  max-inline-size: var(--opo-promo-card-max-inline-size);
+  block-size: 100%;
+}
+
+.opo-promo-card--full-width {
+  max-inline-size: none;
+}
+
+.opo-promo-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--opo-promo-card-title-description-gap);
+  padding-bottom: var(--opo-promo-card-header-media-gap);
+  text-align: center;
+}
+
+.opo-promo-card__title {
+  margin: 0;
+  color: var(--opo-promo-card-title-color);
+  font-family: inherit;
+  font-size: var(--ref-font-size-600); /* 22px */
+  font-weight: var(--sys-typography-body-weight); /* 400 */
+  line-height: var(--ref-line-height-base); /* 32px */
+  letter-spacing: var(--ref-letter-spacing-normal);
+  text-align: center;
+}
+
+.opo-promo-card__description {
+  margin: 0;
+  color: var(--opo-promo-card-description-color);
+  font-family: inherit;
+  font-size: var(--ref-font-size-300); /* 16px */
+  font-weight: var(--ref-font-weight-regular);
+  line-height: var(--ref-line-height-base); /* 24px */
+  letter-spacing: var(--ref-letter-spacing-normal);
+  text-align: center;
+}
+
+.opo-promo-card__media {
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+  max-inline-size: var(--opo-promo-card-media-max-inline-size);
+
+  /* Force the aspect ratio in the CONTAINER */
+  aspect-ratio: var(--opo-promo-card-media-aspect-ratio); /* 492 / 340 */
+  margin: 0 auto;
+  margin-bottom: var(--opo-promo-card-media-action-gap);
+  border-radius: var(--opo-promo-card-image-radius);
+
+  /* Isolate the block rendering to avoid visual conflicts between layers */
+  isolation: isolate;
+
+  /* Clip the straight edges of the image to adopt the parent's border-radius */
+  overflow: hidden;
+
+  /* Force the GPU usage to avoid flickering or corner issues when scrolling */
+  transform: translateZ(0);
+}
+
+.opo-promo-card__image {
+  display: block;
+  inline-size: 100%;
+
+  /* Force the image to stretch to fill the container's height (and the subgrid) without distortion */
+  block-size: 100%;
+  max-width: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+.opo-promo-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  max-inline-size: var(--opo-promo-card-media-max-inline-size);
+
+  /* Push the button down in normal Flexbox mode */
+  margin-block-start: auto;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.opo-promo-card__footer ::slotted(*) {
+  inline-size: 100%;
+}
+
+.opo-promo-card__pending {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-block-size: var(--opo-promo-card-action-min-block-size);
+  color: var(--opo-promo-card-pending-color);
+  font-family: inherit;
+  font-size: var(--ref-font-size-300); /* 16px */
+  font-style: italic;
+  font-weight: var(--sys-typography-body-weight);
+  line-height: var(--ref-line-height-base); /* 24px */
+  letter-spacing: var(--ref-letter-spacing-normal);
+  text-align: center;
+}

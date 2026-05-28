@@ -4,11 +4,9 @@
     "allowUnreachableCode": false,
     "declaration": false,
     "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2022"
-    ],
+    "lib": ["dom", "es2022"],
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "module": "esnext",
     "target": "es2022",
     "noUnusedLocals": true,
@@ -16,14 +14,8 @@
     "jsx": "react",
     "jsxFactory": "h",
     "jsxFragmentFactory": "h.Fragment",
-    "types": [
-      "@stencil/vitest/globals"
-    ]
+    "types": ["@stencil/vitest/globals"]
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src", "landing", "scripts/generate-icon-sprite.js"],
+  "exclude": ["node_modules"]
 }

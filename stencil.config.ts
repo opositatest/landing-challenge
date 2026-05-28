@@ -1,23 +1,23 @@
-import { Config } from '@stencil/core';
+import { Config } from "@stencil/core";
 
 export const config: Config = {
-  namespace: 'landing-challenge',
-  globalStyle: 'src/global/global.css',
+  namespace: "landing-challenge",
+  globalStyle: "src/stylesheets/global.css",
   outputTargets: [
     {
-      type: 'dist',
-      esmLoaderPath: '../loader',
+      type: "dist",
+      esmLoaderPath: "../loader",
     },
     {
-      type: 'dist-custom-elements',
-      customElementsExportBehavior: 'auto-define-custom-elements',
+      type: "dist-custom-elements",
+      customElementsExportBehavior: "auto-define-custom-elements",
       externalRuntime: false,
     },
     {
-      type: 'docs-readme',
+      type: "docs-readme",
     },
     {
-      type: 'www',
+      type: "www",
       serviceWorker: null, // disable service workers
     },
   ],

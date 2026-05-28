@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Base
+   Global semantic defaults for the Design System runtime.
+   ========================================================================== */
+@layer base {
+  html {
+    background: var(--sys-color-surface-page);
+    font-family: var(--sys-typography-body-font-family);
+
+    /* Respect the user's browser default font size for better accessibility scaling */
+    font-size: 100%;
+
+    /* Prevent unexpected automatic text scaling on mobile browsers while preserving accessibility zoom */
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--sys-color-surface-page);
+    color: var(--sys-typography-body-color);
+    font-family: inherit;
+    font-size: var(--sys-typography-body-size);
+    font-weight: var(--sys-typography-body-weight);
+    line-height: var(--sys-typography-body-line-height);
+  }
+
+  :focus-visible {
+    outline: var(--sys-outline-focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--sys-color-surface-selected);
+    color: var(--sys-typography-body-color);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--sys-typography-heading-color); /* #383641 */
+    font-family: var(--sys-typography-heading-font-family);
+    font-weight: var(--sys-typography-heading-weight);
+  }
+
+  p {
+    color: inherit;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}

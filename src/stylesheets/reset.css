@@ -1,0 +1,85 @@
+@layer reset {
+  /*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+  /* 1. Use a more-intuitive box-sizing model */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* 2. Remove default browser margins while preserving <dialog> centering behavior */
+  *:not(dialog) {
+    margin: 0;
+  }
+
+  /* 3. Enable smooth transitions between numeric and intrinsic sizes (e.g. height: 0 -> height: auto) and smooth scrolling when motion is allowed */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      interpolate-size: allow-keywords;
+
+      /* ⚠️ not from Josh's Custom CSS Reset */
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    /* 4. Improve text readability with a more accessible default line-height */
+    line-height: 1.5;
+
+    /* 5. Improve font rendering on macOS */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 6. Prevent media overflow */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* 7. Normalize form control typography for accessibility and usability */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* 8. Prevent layout breaks caused by long text as urls */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  /* 9. Improve balanced text wrapping */
+  p {
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  /* 10. Create a root stacking context to manage z-index and layering (especially useful in React and Next.js apps) */
+  #root,
+  #__next {
+    isolation: isolate;
+  }
+}

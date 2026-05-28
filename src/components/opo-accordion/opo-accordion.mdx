@@ -1,0 +1,457 @@
+import { Meta, Canvas, Stories } from "@storybook/addon-docs/blocks";
+import meta from "./opo-accordion.stories";
+
+<Meta of={meta} />
+
+# Preview
+
+<Stories />
+
+# Accordion
+
+## Overview
+
+`opo-accordion` is a composable disclosure component used to progressively reveal related content sections.
+
+The component is built with `Stencil` and `Shadow DOM`, offering:
+
+- single and multiple expansion modes,
+- controlled and uncontrolled state,
+- responsive spacing,
+- semantic heading levels,
+- accessible keyboard interaction,
+- smooth panel expansion transitions,
+- and visual variants for constrained or outlined layouts.
+
+The accordion is composed of two elements:
+
+- `opo-accordion` → parent container and state manager
+- `opo-accordion-item` → individual expandable item
+
+---
+
+## Import
+
+```ts
+import "@opo/components/opo-accordion";
+import "@opo/components/opo-accordion-item";
+```
+
+---
+
+## Usage
+
+```html
+<opo-accordion type="multiple" default-value="faq-1 faq-2">
+  <opo-accordion-item value="faq-1" label="¿Los test de oposiciones de OpositaTest son gratuitos?">
+    <p>Sí. Puedes acceder a una selección de test gratuitos para empezar a practicar.</p>
+  </opo-accordion-item>
+
+  <opo-accordion-item value="faq-2" label="¿Cómo estudiar para oposiciones tipo test?">
+    <p>Lo ideal es combinar teoría, simulacros y revisión de errores.</p>
+  </opo-accordion-item>
+</opo-accordion>
+```
+
+---
+
+## Variants
+
+### Default
+
+Provides the default elevated accordion appearance using the system shadow token.
+
+```html
+<opo-accordion variant="default">
+  <!-- items -->
+</opo-accordion>
+```
+
+### Outlined
+
+Displays the accordion using a bordered container style.
+
+```html
+<opo-accordion variant="outlined">
+  <!-- items -->
+</opo-accordion>
+```
+
+---
+
+## Selection modes
+
+### Multiple
+
+Allows several accordion items to remain open simultaneously.
+
+```html
+<opo-accordion type="multiple">
+  <!-- items -->
+</opo-accordion>
+```
+
+### Single
+
+Only one item can remain open at a time.
+
+```html
+<opo-accordion type="single">
+  <!-- items -->
+</opo-accordion>
+```
+
+---
+
+## Controlled vs uncontrolled
+
+### Uncontrolled
+
+The accordion manages its internal state using `default-value`.
+
+```html
+<opo-accordion type="multiple" default-value="faq-1 faq-2">
+  <!-- items -->
+</opo-accordion>
+```
+
+### Controlled
+
+The open state is controlled externally using `value`.
+
+```html
+<opo-accordion type="single" value="faq-2">
+  <!-- items -->
+</opo-accordion>
+```
+
+The component emits `opoChange` whenever the requested open state changes.
+
+---
+
+## Full width
+
+Use `full-width` to allow the accordion to expand across the available container width.
+
+```html
+<opo-accordion full-width>
+  <!-- items -->
+</opo-accordion>
+```
+
+---
+
+## Semantic heading levels
+
+Accordion items support semantic heading levels independently from their visual appearance.
+
+```html
+<opo-accordion-item value="faq-1" label="Question" heading-level="4"> Content </opo-accordion-item>
+```
+
+The visual style remains consistent regardless of the selected heading level.
+
+---
+
+## Accessibility
+
+The accordion follows the disclosure pattern using:
+
+- semantic `button` controls,
+- `aria-expanded`,
+- `aria-controls`,
+- `role="region"`,
+- keyboard interaction support,
+- and focus-visible styling.
+
+Each accordion item:
+
+- toggles with `Enter` and `Space`,
+- exposes semantic heading structure,
+- and keeps state synchronized through ARIA attributes.
+
+Decorative icons are marked with `aria-hidden="true"`.
+
+---
+
+## Responsive behavior
+
+The component uses a mobile-first responsive strategy.
+
+Spacing and indentation adapt automatically at the `--ref-breakpoint-md` breakpoint.
+
+Long labels support multiline wrapping while preserving icon alignment and trigger spacing.
+
+---
+
+## Motion
+
+The accordion panel uses a CSS Grid expansion pattern:
+
+```css
+grid-template-rows: minmax(0, 0fr);
+grid-template-rows: minmax(0, 1fr);
+```
+
+This approach allows smooth height transitions while preserving overflow clipping and responsive content behavior.
+
+The chevron icon rotates during expansion and respects `prefers-reduced-motion`.
+
+---
+
+## Shadow parts
+
+<table>
+  <thead>
+    <tr>
+      <th>Part</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>base</code>
+      </td>
+      <td>Accordion root container</td>
+    </tr>
+    <tr>
+      <td>
+        <code>item</code>
+      </td>
+      <td>Accordion item wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>heading</code>
+      </td>
+      <td>Semantic heading wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>trigger</code>
+      </td>
+      <td>Interactive trigger button</td>
+    </tr>
+    <tr>
+      <td>
+        <code>label</code>
+      </td>
+      <td>Trigger label wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>panel</code>
+      </td>
+      <td>Expandable panel wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>panel-inner</code>
+      </td>
+      <td>Internal overflow wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>content</code>
+      </td>
+      <td>Accordion content wrapper</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Accordion props
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>type</code>
+      </td>
+      <td>
+        <code>"single" | "multiple"</code>
+      </td>
+      <td>
+        <code>"multiple"</code>
+      </td>
+      <td>Selection behavior</td>
+    </tr>
+    <tr>
+      <td>
+        <code>value</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Controlled open value</td>
+    </tr>
+    <tr>
+      <td>
+        <code>defaultValue</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Initial uncontrolled open value</td>
+    </tr>
+    <tr>
+      <td>
+        <code>variant</code>
+      </td>
+      <td>
+        <code>"default" | "outlined"</code>
+      </td>
+      <td>
+        <code>"default"</code>
+      </td>
+      <td>Visual appearance variant</td>
+    </tr>
+    <tr>
+      <td>
+        <code>collapsible</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>true</code>
+      </td>
+      <td>Allows collapsing the current item in single mode</td>
+    </tr>
+    <tr>
+      <td>
+        <code>fullWidth</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
+      <td>Expands the accordion to the available width</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Accordion item props
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>value</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>—</td>
+      <td>Unique item identifier</td>
+    </tr>
+    <tr>
+      <td>
+        <code>label</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>—</td>
+      <td>Visible trigger label</td>
+    </tr>
+    <tr>
+      <td>
+        <code>headingLevel</code>
+      </td>
+      <td>
+        <code>2 | 3 | 4 | 5 | 6</code>
+      </td>
+      <td>
+        <code>3</code>
+      </td>
+      <td>Semantic heading level</td>
+    </tr>
+    <tr>
+      <td>
+        <code>disabled</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
+      <td>Disables accordion interaction</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Events
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Payload</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>opoChange</code>
+      </td>
+      <td>
+        <code>string | string[] | undefined</code>
+      </td>
+      <td>Emitted when the accordion open state changes</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Do / Don’t
+
+### ✅ Do
+
+- Use semantic heading levels according to the page hierarchy.
+- Use `single` mode when only one section should remain visible.
+- Use `multiple` mode for FAQ-style content.
+- Keep trigger labels concise and descriptive.
+- Allow labels to wrap naturally on smaller screens.
+- Use `full-width` inside fluid layouts.
+
+### ❌ Don’t
+
+- Don’t place interactive controls inside the trigger label.
+- Don’t use overly long labels without considering responsive wrapping.
+- Don’t rely exclusively on visual state changes to communicate expansion.
+- Don’t remove focus-visible styles.
+- Don’t use the accordion for unrelated or disconnected content sections.

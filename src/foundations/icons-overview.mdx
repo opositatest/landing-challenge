@@ -1,0 +1,54 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Icons" parameters={{ viewport: { disable: true } }} />
+
+<div className="style-guide-stories icons-stories">
+  <header>
+    <h1>Icons</h1>
+    <div>
+     Las foundations de iconografía están organizadas en dos conjuntos: iconos de interfaz (UI) e iconos de marca (Brand). Abre cada sección a continuación para explorar los nombres y previsualizaciones disponibles.
+    </div>
+  </header>
+
+  <section>
+    <h2 id="icon-sets">Icon sets</h2>
+<h3 className="docs-token-title">UI icons</h3>
+    <ul className="docs-token-stack " style={{ ['--docs-token-stack-gap']: '0.75rem' }}>
+      <li className="docs-token-item ">
+        <div>
+          <p>Para los assets de UI Icons se ha utilizado un set base de <a href="https://lucide.dev/">Lucide Icons</a>, una librería de iconografía moderna y bien mantenida compuesta por iconos de interfaz en formato outline.</p>
+
+          <p><strong>Propósito:</strong> El conjunto base de Lucide Icons se utilizó como punto de partida para validar y desarrollar el pipeline de generación de sprites del Design System. Esto permitió:</p>
+
+          <ul className="docs-token-list" style={{ marginLeft: '1rem', marginTop: '0.5rem' }}>
+            <li>Establecer criterios de validación consistentes </li>
+            <li>Construir una arquitectura de sprites SVG reutilizables para el componente (<span className='code-inline'>viewBox</span> 24x24, uso de <span className='code-inline'>currentColor</span>, etc.).</li>
+            <li>Identificar y documentar problemáticas habituales en assets SVG que no siguen patrones normalizados <b>(viewBox inconsistentes, colores hardcodeados, atributos redundantes, etc.).</b></li>
+            <li>Definir un pipeline de optimización y sanitización escalable mediante SVGO.</li>
+            <li>Construir una arquitectura de sprites SVG reutilizables para el componente <span className='code-inline'>opo-icon</span>.</li>
+
+          </ul>
+
+          <p><strong>Características de Lucide Icons:</strong> Todos los iconos mantienen una grid consistente de <span className='code-inline'>24x24</span>, utilizan una aproximación stroke-based (outline) y están optimizados para interfaces de usuario. Esto proporciona una base sólida y predecible para validar el sistema de generación de iconos.</p>
+        </div>
+        <div>
+          <a href="/?path=/src/foundations-icons-ui--docs">Open Foundations / Icons / UI</a>
+        </div>
+      </li>
+
+      <hr />
+
+      <li className="docs-token-item">
+        <h3 className="docs-token-title">Brand icons</h3>
+        <div>
+          <p>Los assets de Brand Icons proceden de los SVG originales facilitados para la prueba técnica.</p>
+          <p>Estos archivos se cargan sin procesos previos de sanitización o normalización, pero siguen renderizándose mediante el pipeline de sprites del sistema de diseño <span className='code-inline'>(symbol/use)</span>. Esto permite visualizar problemáticas reales derivadas de la exportación original de los assets manteniendo, al mismo tiempo, la misma arquitectura de renderizado basada en componentes utilizada en el resto del sistema.</p>
+        </div>
+        <div>
+          <a href="/?path=/src/foundations-icons-brand--docs">Open Foundations / Icons / Brand</a>
+        </div>
+      </li>
+    </ul>
+
+  </section>
+</div>

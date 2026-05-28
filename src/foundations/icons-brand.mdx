@@ -1,0 +1,36 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { brandBrokenIconNames } from "./tokens-data";
+
+<Meta title="Foundations/Icons/Brand" parameters={{ viewport: { disable: true } }} />
+
+<div className="style-guide-stories icons-stories">
+  <header>
+    <h1>Brand Broken Icons</h1>
+    <div>
+        Galería de iconos de marca con errores procedentes de <span className='code-inline'>src/components/opo-icon/raw-icons/brand-broken</span>.
+
+    </div>
+
+  </header>
+
+  <section>
+    <h2 id="brand-icons">Brand broken icons ({brandBrokenIconNames.length})</h2>
+
+    <div className="docs-token-grid icon-palette">
+      {brandBrokenIconNames.map((name) => (
+        <div key={name} className="docs-token-card">
+          <div className="docs-token-surface icon-surface" style={{transform: 'translateY(3px)'}}>
+            <svg width="32" height="32" aria-label={name}>
+              <use href={`/icons/opo-sprite-brand-broken.svg#opo-icon-${name}-broken`} />
+            </svg>
+          </div>
+          <div className="docs-token-card-caption" style={{ alignItems: 'center' }}>
+            <div className="docs-token-label">name</div>
+            <div className="docs-token-value">{name}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </section>
+</div>

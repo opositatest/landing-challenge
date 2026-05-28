@@ -1,0 +1,329 @@
+import { Meta, Canvas, Stories } from "@storybook/addon-docs/blocks";
+import meta from "./opo-avatar.stories";
+
+<Meta of={meta} />
+
+# Preview
+
+<Stories />
+
+# opo-avatar
+
+Avatar circular del Design System OPO.
+
+El componente está construido con `Stencil` y `Shadow DOM`, ofreciendo:
+
+- representación visual de usuarios o entidades,
+- soporte para imágenes,
+- fallbacks mediante iniciales,
+- fallbacks mediante iconos,
+- tamaños semánticos,
+- y composición consistente dentro del sistema.
+
+---
+
+## Import
+
+```tsx
+import "@opo/components/opo-avatar";
+```
+
+---
+
+## Basic usage
+
+```html
+<opo-avatar src="/avatar.jpg" alt="Jane Doe"></opo-avatar>
+```
+
+---
+
+## Sizes
+
+La prop `size` controla el tamaño visual del avatar.
+
+```html
+<opo-avatar src="/avatar.jpg" alt="Jane Doe" size="sm"></opo-avatar>
+
+<opo-avatar src="/avatar.jpg" alt="Jane Doe" size="md"></opo-avatar>
+
+<opo-avatar src="/avatar.jpg" alt="Jane Doe" size="lg"></opo-avatar>
+```
+
+---
+
+## Fallbacks
+
+Cuando no existe imagen válida, el componente renderiza automáticamente un fallback.
+
+### Initials fallback
+
+```html
+<opo-avatar fallback="JD"></opo-avatar>
+```
+
+### Icon fallback
+
+```html
+<opo-avatar fallback-icon="user"></opo-avatar>
+```
+
+### Custom fallback icon
+
+```html
+<opo-avatar fallback-icon="settings"></opo-avatar>
+```
+
+---
+
+## Broken image fallback
+
+Si la imagen falla durante la carga, el componente cambia automáticamente al fallback.
+
+```html
+<opo-avatar src="/missing-avatar.jpg" fallback="JD"></opo-avatar>
+```
+
+---
+
+## Colors
+
+El fallback soporta tratamientos visuales semánticos.
+
+```html
+<opo-avatar fallback="JD" color="neutral"></opo-avatar>
+
+<opo-avatar fallback="JD" color="brand"></opo-avatar>
+```
+
+---
+
+## Accessibility
+
+Cuando existe imagen:
+
+```html
+<opo-avatar src="/avatar.jpg" alt="Jane Doe"></opo-avatar>
+```
+
+el componente utiliza el atributo `alt` del elemento `<img>`.
+
+Cuando el avatar es decorativo o el nombre ya está visible cerca:
+
+```html
+<opo-avatar src="/avatar.jpg" alt=""></opo-avatar>
+```
+
+los fallbacks visuales:
+
+- iniciales,
+- iconos,
+
+se ocultan automáticamente de tecnologías asistivas mediante:
+
+```html
+aria-hidden="true"
+```
+
+---
+
+## Composition examples
+
+### With text
+
+```html
+<div style="display:flex; align-items:center; gap:12px;">
+  <opo-avatar src="/avatar.jpg" alt=""></opo-avatar>
+
+  <div>
+    <strong>Jane Doe</strong>
+    <span>UI Engineer</span>
+  </div>
+</div>
+```
+
+### Inside buttons
+
+```html
+<opo-button variant="ghost">
+  <opo-avatar slot="icon-start" src="/avatar.jpg" alt="" size="sm"></opo-avatar>
+
+  Perfil
+</opo-button>
+```
+
+### Inside cards
+
+```html
+<opo-card variant="outlined">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <opo-avatar src="/avatar.jpg" alt=""></opo-avatar>
+
+    <div>
+      <strong>Jane Doe</strong>
+      <span>Design Systems · UI Engineering</span>
+    </div>
+  </div>
+</opo-card>
+```
+
+---
+
+## Public styling API
+
+### Shadow parts
+
+<table>
+  <thead>
+    <tr>
+      <th>Part</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>base</code>
+      </td>
+      <td>Root avatar wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>image</code>
+      </td>
+      <td>Internal image element</td>
+    </tr>
+    <tr>
+      <td>
+        <code>fallback</code>
+      </td>
+      <td>Fallback wrapper</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Props
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>src</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Avatar image source</td>
+    </tr>
+    <tr>
+      <td>
+        <code>alt</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>""</code>
+      </td>
+      <td>Accessible image description</td>
+    </tr>
+    <tr>
+      <td>
+        <code>fallback</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Fallback text, usually initials</td>
+    </tr>
+    <tr>
+      <td>
+        <code>fallbackIcon</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>"user"</code>
+      </td>
+      <td>Fallback icon name</td>
+    </tr>
+    <tr>
+      <td>
+        <code>size</code>
+      </td>
+      <td>
+        <code>"sm" | "md" | "lg"</code>
+      </td>
+      <td>
+        <code>"md"</code>
+      </td>
+      <td>Visual avatar size</td>
+    </tr>
+    <tr>
+      <td>
+        <code>color</code>
+      </td>
+      <td>
+        <code>"neutral" | "brand"</code>
+      </td>
+      <td>
+        <code>"neutral"</code>
+      </td>
+      <td>Fallback color treatment</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Do / Don’t
+
+### Do
+
+- Usa `alt=""` cuando el nombre del usuario ya esté visible cerca del avatar.
+  Esto evita contenido duplicado para lectores de pantalla.
+
+- Usa iniciales como fallback cuando representen claramente a la entidad mostrada.
+  Las iniciales suelen resultar más reconocibles que un icono genérico.
+
+- Usa `size` para mantener consistencia visual dentro del sistema.
+  Los tamaños del avatar están alineados con la escala global de spacing y typography.
+
+### Don’t
+
+- No uses el avatar como elemento interactivo por sí mismo.
+  La interacción debería pertenecer a `opo-button` o `opo-link`.
+
+- No dependas únicamente del avatar para identificar usuarios importantes.
+  El nombre o contexto textual debería seguir siendo visible cuando sea relevante.
+
+- No asumas que todas las imágenes se mostrarán completas dentro del avatar.
+  El componente utiliza `object-fit: cover`, por lo que imágenes no cuadradas pueden recortarse para mantener proporción y evitar deformaciones.
+
+---
+
+## Notes
+
+- `opo-avatar` utiliza imágenes nativas mediante `<img>`.
+- El componente utiliza Shadow DOM.
+- Los fallbacks se renderizan automáticamente cuando la imagen no existe o falla durante la carga.
+- El componente está diseñado como representación visual, no como control interactivo.
+- El avatar es siempre circular.
+- Las imágenes utilizan `object-fit: cover` para evitar deformaciones visuales.

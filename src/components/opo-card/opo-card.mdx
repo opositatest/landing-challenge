@@ -1,0 +1,433 @@
+import { Meta, Canvas, Stories } from "@storybook/addon-docs/blocks";
+import meta from "./opo-card.stories";
+
+<Meta of={meta} />
+
+# Preview
+
+<Stories />
+
+# opo-card
+
+Contenedor composable del **Design System OPO**.
+
+El componente está construido con `Stencil` y `Shadow DOM`. Está pensado para estructurar contenido visual agrupado mediante una API basada en slots semánticos. Soporta:
+
+- contenedores composables,
+- variantes visuales,
+- tamaños,
+- slots semánticos,
+- affordance interactiva opcional,
+- y estructura desacoplada del contenido.
+
+---
+
+## Import
+
+```tsx
+import "@opo/components/opo-card";
+```
+
+---
+
+## Basic usage
+
+```html
+<opo-card>
+  <h3 slot="title">Plan semanal</h3>
+  <p slot="description">Organiza sesiones de estudio y repasos.</p>
+  <p>Contenido principal de la card.</p>
+</opo-card>
+```
+
+---
+
+## Variants
+
+```html
+<opo-card variant="default">...</opo-card>
+<opo-card variant="outlined">...</opo-card>
+<opo-card variant="elevated">...</opo-card>
+```
+
+### Default
+
+Card base con shadow suave.
+
+### Outlined
+
+Card con borde y sin elevación.
+
+### Elevated
+
+Card con shadow más pronunciada para destacar jerarquía visual.
+
+---
+
+## Sizes
+
+La prop `size` controla:
+
+- padding interno,
+- spacing vertical,
+- y densidad general del layout.
+
+```html
+<opo-card size="sm">...</opo-card>
+<opo-card size="md">...</opo-card>
+<opo-card size="lg">...</opo-card>
+```
+
+---
+
+## Semantic root element
+
+La prop `as` permite controlar el elemento semántico raíz renderizado por la card.
+
+```html
+<opo-card as="div">...</opo-card>
+<opo-card as="article">...</opo-card>
+<opo-card as="section">...</opo-card>
+```
+
+Por defecto:
+
+```html
+<div></div>
+```
+
+---
+
+## Interactive
+
+`interactive` añade affordance visual interactiva, pero no convierte la card en un control interactivo.
+
+```html
+<opo-card interactive>...</opo-card>
+```
+
+El componente:
+
+- no añade semántica de botón,
+- no añade navegación,
+- y no emite eventos especiales.
+
+Para navegación o acciones:
+
+- usa `opo-link`,
+- o `opo-button`.
+
+---
+
+## Full width
+
+```html
+<opo-card full-width>...</opo-card>
+```
+
+Hace que la card ocupe todo el ancho disponible del contenedor.
+
+---
+
+## Media
+
+La card soporta contenido multimedia mediante el slot `media`.
+
+```html
+<opo-card>
+  <img slot="media" src="/image.jpg" alt="" />
+  <h3 slot="title">Curso</h3>
+</opo-card>
+```
+
+---
+
+## Heading slots
+
+La estructura principal de contenido se organiza mediante:
+
+- `eyebrow`
+- `title`
+- `description`
+
+```html
+<opo-card>
+  <span slot="eyebrow">Preparación</span>
+  <h3 slot="title">Plan semanal</h3>
+  <p slot="description">Organización de sesiones y repasos.</p>
+</opo-card>
+```
+
+---
+
+## Action slot
+
+Permite colocar acciones contextuales en la parte superior derecha.
+
+```html
+<opo-card>
+  <opo-button slot="action" variant="ghost" icon-only aria-label="Más opciones">
+    <opo-icon slot="icon-start" name="settings"></opo-icon>
+  </opo-button>
+</opo-card>
+```
+
+---
+
+## Footer slot
+
+```html
+<opo-card>
+  <div slot="footer">
+    <opo-button variant="primary">Ver más</opo-button>
+  </div>
+</opo-card>
+```
+
+---
+
+## Composition example
+
+```html
+<opo-card variant="outlined" size="md">
+  <img slot="media" src="/image.jpg" alt="" />
+
+  <span slot="eyebrow">Curso</span>
+  <h3 slot="title">Diseño de componentes</h3>
+  <p slot="description">Aprende a estructurar componentes reutilizables.</p>
+
+  <p>Una card puede combinar media, contenido y acciones sin acoplarse a un layout concreto.</p>
+
+  <opo-button slot="footer" variant="primary">Ver curso</opo-button>
+</opo-card>
+```
+
+---
+
+## Public styling API
+
+### Shadow parts
+
+<table>
+  <thead>
+    <tr>
+      <th>Part</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>base</code>
+      </td>
+      <td>Root semantic container</td>
+    </tr>
+    <tr>
+      <td>
+        <code>body</code>
+      </td>
+      <td>Internal body wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>header</code>
+      </td>
+      <td>Header layout wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>heading</code>
+      </td>
+      <td>Heading content wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>action</code>
+      </td>
+      <td>Action slot wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>content</code>
+      </td>
+      <td>Main content wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>footer</code>
+      </td>
+      <td>Footer wrapper</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Props
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>as</code>
+      </td>
+      <td>
+        <code>"div" | "article" | "section"</code>
+      </td>
+      <td>
+        <code>"div"</code>
+      </td>
+      <td>Semantic root element</td>
+    </tr>
+    <tr>
+      <td>
+        <code>variant</code>
+      </td>
+      <td>
+        <code>"default" | "outlined" | "elevated"</code>
+      </td>
+      <td>
+        <code>"default"</code>
+      </td>
+      <td>Visual style</td>
+    </tr>
+    <tr>
+      <td>
+        <code>size</code>
+      </td>
+      <td>
+        <code>"sm" | "md" | "lg"</code>
+      </td>
+      <td>
+        <code>"md"</code>
+      </td>
+      <td>Internal spacing density</td>
+    </tr>
+    <tr>
+      <td>
+        <code>fullWidth</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
+      <td>Expands card width to the container</td>
+    </tr>
+    <tr>
+      <td>
+        <code>interactive</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
+      <td>Adds interactive visual affordance</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Slots
+
+<table>
+  <thead>
+    <tr>
+      <th>Slot</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>default</code>
+      </td>
+      <td>Main content</td>
+    </tr>
+    <tr>
+      <td>
+        <code>media</code>
+      </td>
+      <td>Media content</td>
+    </tr>
+    <tr>
+      <td>
+        <code>eyebrow</code>
+      </td>
+      <td>Small contextual text</td>
+    </tr>
+    <tr>
+      <td>
+        <code>title</code>
+      </td>
+      <td>Main heading</td>
+    </tr>
+    <tr>
+      <td>
+        <code>description</code>
+      </td>
+      <td>Supporting description</td>
+    </tr>
+    <tr>
+      <td>
+        <code>action</code>
+      </td>
+      <td>Contextual action</td>
+    </tr>
+    <tr>
+      <td>
+        <code>footer</code>
+      </td>
+      <td>Footer content</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Do / Don’t
+
+### Do
+
+- Usa cards como contenedores composables.
+  El componente está pensado para estructurar contenido visual agrupado, no para imponer comportamiento o lógica de producto.
+
+- Usa `as` para adaptar la semántica al contexto real.
+  Algunas cards representan artículos, otras secciones o simples contenedores; la semántica debería acompañar el contenido.
+
+- Usa slots semánticos como `title`, `description`, `action` y `footer`.
+  Esto mantiene una estructura consistente sin limitar la composición del contenido.
+
+### Don’t
+
+- No conviertas toda la card en un botón falso.
+  Si hay navegación, usa `opo-link`; si hay una acción, usa `opo-button`.
+
+- No sobrecargues una card con demasiadas acciones simultáneas.
+  La card debería mantener una jerarquía clara y no competir con múltiples llamadas a la acción.
+
+- No dependas únicamente de la elevación visual para comunicar interacción.
+  `interactive` añade affordance visual, pero no sustituye una semántica interactiva real.
+
+---
+
+## Notes
+
+- `opo-card` es intencionadamente composable y orientado a layout.
+- El componente no impone semántica interactiva.
+- Usa `opo-link` para navegación.
+- Usa `opo-button` para acciones.
+- El componente usa Shadow DOM.
+- El espaciado interno y el estilo visual están basados en Design Tokens.

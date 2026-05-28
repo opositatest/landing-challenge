@@ -1,0 +1,403 @@
+import { Meta, Stories } from "@storybook/addon-docs/blocks";
+import meta from "./opo-link.stories";
+
+<Meta of={meta} />
+
+# Preview
+
+<Stories />
+
+# opo-link
+
+Link semántico del **Design System OPO**.
+
+El componente está construido sobre semántica nativa de enlace y `Shadow DOM`, ofreciendo:
+
+- navegación accesible,
+- variantes visuales,
+- distintos comportamientos de subrayado,
+- orientación horizontal o vertical para composiciones con iconos,
+- soporte para links externos,
+- estados no navegables,
+- colores estáticos para fondos especiales,
+- y affordance visual consistente con el sistema.
+
+Cuando recibe `href`, renderiza un `<a>`. Cuando no recibe `href` o está `disabled`, renderiza un elemento no navegable.
+
+---
+
+## Import
+
+```tsx
+import "@opo/components/opo-link";
+```
+
+---
+
+## Basic usage
+
+```html
+<opo-link href="/docs">Ver documentación</opo-link>
+```
+
+---
+
+## Variants
+
+```html
+<opo-link href="/docs" variant="primary">Enlace principal</opo-link>
+<opo-link href="/docs" variant="secondary">Enlace secundario</opo-link>
+```
+
+---
+
+## Underline
+
+`underline` controla el comportamiento del subrayado del enlace.
+
+```html
+<opo-link href="/docs" underline="default">Subrayado por defecto</opo-link>
+<opo-link href="/docs" underline="none">Sin subrayado</opo-link>
+<opo-link href="/docs" underline="reveal">Subrayado reveal</opo-link>
+```
+
+### `default`
+
+Usa el subrayado nativo del navegador, ajustado mediante `text-decoration-thickness` y `text-underline-offset` para mantener una lectura equilibrada.
+
+### `none`
+
+Elimina el subrayado cuando el contexto visual ya deja claro que el elemento es navegable, como navegación, breadcrumbs, listas contextuales o cards.
+
+### `reveal`
+
+Oculta el subrayado por defecto y muestra una línea animada en hover/focus. Es útil para navegación o contextos de marketing donde se busca un feedback visual más expresivo, manteniendo el color mediante `currentColor`.
+
+---
+
+## Orientation
+
+`orientation` controla la dirección interna del contenido del enlace.
+
+```html
+<opo-link href="/docs" orientation="horizontal">
+  <opo-icon slot="icon-start" name="external-link" size="sm"></opo-icon>
+  Enlace horizontal
+</opo-link>
+
+<opo-link href="/carrito" orientation="vertical" underline="none">
+  <opo-icon slot="icon-start" name="shop" size="lg"></opo-icon>
+  Carrito
+</opo-link>
+```
+
+### `horizontal`
+
+Es la orientación por defecto. Está pensada para enlaces inline, navegación horizontal, breadcrumbs o enlaces dentro de texto.
+
+### `vertical`
+
+Apila icono y texto en columna. Es útil para accesos rápidos, navegación visual, shortcuts de dashboard o patrones donde el icono funciona como apoyo visual principal.
+
+La orientación no cambia la semántica del enlace: solo modifica la composición interna del contenido.
+
+---
+
+## Static colors
+
+`staticColor` permite forzar un color estable cuando el link se coloca sobre fondos fijos.
+
+```html
+<opo-link href="/docs" static-color="white">Enlace sobre fondo oscuro</opo-link>
+<opo-link href="/docs" static-color="black">Enlace sobre fondo claro</opo-link>
+```
+
+---
+
+## Disabled
+
+Como `<a>` no soporta `disabled` nativo, cuando `disabled` está activo el componente deja de renderizar un enlace navegable y renderiza un fallback semántico con `aria-disabled="true"`.
+
+```html
+<opo-link href="/docs" disabled>Enlace deshabilitado</opo-link>
+```
+
+---
+
+## Without href
+
+Si no se proporciona `href`, el componente también renderiza un fallback no navegable, pero sin `aria-disabled`, porque no se considera necesariamente un estado deshabilitado.
+
+```html
+<opo-link>Enlace sin destino</opo-link>
+```
+
+---
+
+## External links
+
+Cuando `target="_blank"` se usa sin `rel`, el componente aplica automáticamente:
+
+```html
+rel="noopener noreferrer"
+```
+
+```html
+<opo-link href="https://example.com" target="_blank">Abrir enlace externo</opo-link>
+```
+
+---
+
+## Download links
+
+```html
+<opo-link href="/example.pdf" download>Descargar archivo</opo-link>
+<opo-link href="/example.pdf" download="example.pdf">Descargar archivo</opo-link>
+```
+
+---
+
+## Accessibility
+
+El componente mantiene:
+
+- semántica nativa de `<a>` cuando hay navegación real,
+- fallback no navegable cuando está disabled o no hay `href`,
+- `aria-disabled="true"` solo cuando `disabled` está activo,
+- soporte para `ariaLabel`,
+- `rel="noopener noreferrer"` automático para enlaces externos,
+- y `prefers-reduced-motion` para reducir la transición del subrayado reveal cuando el usuario lo solicita.
+
+```html
+<opo-link href="/docs" aria-label="Abrir documentación del sistema"> Docs </opo-link>
+```
+
+---
+
+## Public styling API
+
+### Shadow parts
+
+<table>
+  <thead>
+    <tr>
+      <th>Part</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>base</code>
+      </td>
+      <td>Native anchor or non-navigable fallback element</td>
+    </tr>
+    <tr>
+      <td>
+        <code>label</code>
+      </td>
+      <td>Visible link label wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>icon-start</code>
+      </td>
+      <td>Start icon slot wrapper</td>
+    </tr>
+    <tr>
+      <td>
+        <code>icon-end</code>
+      </td>
+      <td>End icon slot wrapper</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Props
+
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>href</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>URL de destino</td>
+    </tr>
+    <tr>
+      <td>
+        <code>variant</code>
+      </td>
+      <td>
+        <code>"primary" | "secondary"</code>
+      </td>
+      <td>
+        <code>"primary"</code>
+      </td>
+      <td>Variante visual</td>
+    </tr>
+    <tr>
+      <td>
+        <code>underline</code>
+      </td>
+      <td>
+        <code>"default" | "none" | "reveal"</code>
+      </td>
+      <td>
+        <code>"default"</code>
+      </td>
+      <td>Comportamiento del subrayado</td>
+    </tr>
+    <tr>
+      <td>
+        <code>orientation</code>
+      </td>
+      <td>
+        <code>"horizontal" | "vertical"</code>
+      </td>
+      <td>
+        <code>"horizontal"</code>
+      </td>
+      <td>Orientación interna del contenido del enlace</td>
+    </tr>
+    <tr>
+      <td>
+        <code>disabled</code>
+      </td>
+      <td>
+        <code>boolean</code>
+      </td>
+      <td>
+        <code>false</code>
+      </td>
+      <td>Deshabilita la navegación</td>
+    </tr>
+    <tr>
+      <td>
+        <code>staticColor</code>
+      </td>
+      <td>
+        <code>"white" | "black"</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Color estático para fondos fijos</td>
+    </tr>
+    <tr>
+      <td>
+        <code>target</code>
+      </td>
+      <td>
+        <code>"_blank" | "_self" | "_parent" | "_top"</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Dónde abrir el documento enlazado</td>
+    </tr>
+    <tr>
+      <td>
+        <code>rel</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Relación entre documentos</td>
+    </tr>
+    <tr>
+      <td>
+        <code>download</code>
+      </td>
+      <td>
+        <code>boolean | string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Descarga el recurso enlazado</td>
+    </tr>
+    <tr>
+      <td>
+        <code>referrerPolicy</code>
+      </td>
+      <td>
+        <code>ReferrerPolicy</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Política de referrer</td>
+    </tr>
+    <tr>
+      <td>
+        <code>ariaLabel</code>
+      </td>
+      <td>
+        <code>string</code>
+      </td>
+      <td>
+        <code>undefined</code>
+      </td>
+      <td>Etiqueta accesible</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Do / Don’t
+
+### Do
+
+- Usa `opo-link` para navegación real.
+  El componente mantiene semántica nativa de enlace cuando existe `href`, incluyendo comportamiento esperado del navegador.
+
+- Usa `underline="none"` solo cuando el contexto visual ya indique claramente que el elemento es navegable.
+  Es adecuado en navegación, breadcrumbs, listas contextuales o cards donde el patrón ya es evidente.
+
+- Usa `underline="reveal"` para patrones de navegación o contextos expresivos donde el subrayado animado aporte feedback visual sin comprometer la claridad.
+
+- Usa `orientation="vertical"` cuando el enlace funcione como acceso visual compuesto por icono y texto, por ejemplo en accesos rápidos o navegación tipo shortcut.
+
+- Usa `staticColor` sobre fondos fijos o superficies especiales.
+  Esto ayuda a mantener contraste y legibilidad cuando el color contextual no es suficiente.
+
+### Don’t
+
+- No uses links para ejecutar acciones.
+  Si el elemento dispara una acción en la interfaz, usa `opo-button` para mantener semántica y expectativas correctas.
+
+- No elimines el subrayado en contextos ambiguos.
+  El underline sigue siendo uno de los indicadores visuales más reconocibles de navegación.
+
+- No simules estados disabled sobre anchors nativos.
+  El componente ya renderiza un fallback no navegable cuando `disabled` está activo o cuando no existe `href`.
+
+---
+
+## Notes
+
+- Usa `opo-link` para navegación.
+- Usa `opo-button` para acciones.
+- Usa `orientation="horizontal"` para enlaces inline o navegación convencional y `orientation="vertical"` para accesos visuales con icono sobre texto.
+- Evita usar links sin `href` salvo en placeholders (Ej: próximamente) o estados deliberadamente no navegables.
+- `disabled` no simula un `<a disabled>`; cambia la semántica renderizada para evitar navegación falsa.

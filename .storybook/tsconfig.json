@@ -1,0 +1,8 @@
+{
+  "$schema": "https://www.schemastore.org/tsconfig.json",
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["@stencil/vitest/globals", "vite/client"]
+  },
+  "include": ["./*.ts", "./*.d.ts", "../src/**/*.d.ts"]
+}

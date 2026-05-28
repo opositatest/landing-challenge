@@ -1,57 +1,93 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { fontFamily, fontWeights, scales } from './tokens-data';
+import { fontFamily, fontSizes, fontWeights, letterSpacing, lineHeights, previewText, lineHeightPreviewText } from './tokens-data';
 
 <Meta title="Foundations/Typography" parameters={{ viewport: { disable: true } }} />
 
 <div className="style-guide-stories typography-stories">
-  # Typography
+  <header>
+    <h1>Typography</h1>
+    <p>
+      {
+        'Shared reference typography tokens used as the visual foundation of the system. These values are intended to be consumed through system or component tokens when defining final typography styles.'
+      }
+    </p>
+  </header>
 
-  <p>Shared typography tokens used by the landing and the component layer.</p>
-
-  ## Font name
-
-  <ul>
-    {Object.entries(fontFamily).map(([key, value]) => (
-      <li key={key}>
-        <b>{key}:</b> {value}
-      </li>
-    ))}
-  </ul>
-
-  ## Font weight
-
-  <ul>
-    {Object.entries(fontWeights).map(([key, value]) => (
-      <li key={key}>
-        <span style={{ fontWeight: value }}>{key}: {value}</span>
-      </li>
-    ))}
-  </ul>
-
-  ## Font sizes
-
-  <small className="type-meta">
-    <b className="type-key">key</b>: Desktop (fontSize / lineHeight) - Mobile (fontSize / lineHeight)
-  </small>
-
-  <div className="type-stack">
-    {scales.map(([key, desktopSize, desktopLineHeight, mobileSize, mobileLineHeight]) => (
-      <div key={key} className="type-item">
-        <div className="type-meta">
-          <span className="type-key">{key}</span>: Desktop {desktopSize} / {desktopLineHeight} - Mobile {mobileSize} / {mobileLineHeight}
+<section>
+  <h2 id="type-scale">Type scale</h2>
+  <div className="docs-token-stack type-scale-stack">
+    {Object.entries(fontSizes).map(([key, value]) => (
+      <div key={key} className="docs-token-item">
+        <div className="docs-token-preview type-scale-preview" style={{ fontSize: `var(${key})` }}>
+          {previewText}
         </div>
-        <div
-          style={{
-            color: 'var(--color-text-primary)',
-            fontFamily: 'var(--font-family-main)',
-            fontSize: desktopSize,
-            fontWeight: 'var(--font-weight-text)',
-            lineHeight: desktopLineHeight,
-          }}
-        >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </div>
+        <div className="docs-token-label">{key}</div>
+        <div className="docs-token-value">{value}</div>
       </div>
     ))}
   </div>
+</section>
+
+<section>
+  <h2 id="font-family">Font family</h2>
+  <ul className="docs-token-stack">
+    {Object.entries(fontFamily).map(([key, value]) => (
+      <li key={key} className="docs-token-item">
+        <div className="docs-token-preview" style={{ fontFamily: value }}>
+          {previewText}
+        </div>
+        <div className="docs-token-label">{key}</div>
+        <div className="docs-token-value">{value}</div>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<section>
+  <h2 id="font-weights">Font weights</h2>
+  <ul className="docs-token-stack">
+    {Object.entries(fontWeights).map(([key, value]) => (
+      <li key={key} className="docs-token-item">
+        <div className="docs-token-preview" style={{ fontWeight: value }}>
+          {previewText}
+        </div>
+        <div className="docs-token-label">{key}</div>
+        <div className="docs-token-value">{value}</div>
+      </li>
+    ))}
+  </ul>
+</section>
+
+  <section>
+    <h2 id="line-heights">Line heights</h2>
+    <div className="docs-token-grid line-height-palette">
+      {Object.entries(lineHeights).map(([key, [rawValue, cssValue]]) => (
+        <div key={key} className="docs-token-card">
+          <div className="docs-token-surface line-height-preview" style={{ lineHeight: cssValue }}>
+            {lineHeightPreviewText}
+          </div>
+          <div className="docs-token-card-caption">
+            <div className="docs-token-label">{key}</div>
+            <div className="docs-token-value">{rawValue} · unitless</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </section>
+
+  <section>
+    <h2 id="letter-spacing">Letter spacing</h2>
+    <ul className="docs-token-stack">
+      {Object.entries(letterSpacing).map(([key, value]) => (
+        <li key={key} className="docs-token-item">
+          <div className="docs-token-preview letter-spacing-preview" style={{ letterSpacing: value }}>
+            {previewText}
+          </div>
+            <div className="docs-token-label">{key}</div>
+            <div className="docs-token-value">{value}</div>
+        </li>
+      ))}
+    </ul>
+  </section>
 </div>

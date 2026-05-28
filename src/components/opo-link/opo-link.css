@@ -1,0 +1,198 @@
+:host {
+  display: inline;
+}
+
+/* Prevents the host display value from overriding the native hidden behavior. */
+:host([hidden]) {
+  display: none;
+}
+
+.opo-link {
+  --opo-link-color: var(--sys-color-link-primary); /* #ffb142 */
+  --opo-link-hover-color: var(--sys-color-link-primary-hover);
+  --opo-link-pressed-color: var(--sys-color-link-primary-pressed);
+  --opo-link-icon-gap: var(--sys-space-2xs); /* 8px */
+
+  display: inline-flex;
+  align-items: center;
+  color: var(--opo-link-color);
+  font: inherit;
+  text-decoration-line: underline;
+
+  /* Use underline thickness defined by the font for more balanced text decoration rendering */
+  text-decoration-thickness: from-font;
+
+  /* Improve underline readability by adding visual separation from the text baseline */
+  text-underline-offset: 0.15em;
+  vertical-align: baseline;
+  cursor: pointer;
+  transition:
+    color var(--ref-motion-duration-faster) ease,
+    text-decoration-color var(--ref-motion-duration-faster) ease;
+}
+
+/* ==================== VARIANTS ==================== */
+
+.opo-link--primary {
+  --opo-link-color: var(--sys-color-link-primary); /* #ffb142 */
+  --opo-link-hover-color: var(--sys-color-link-primary-hover);
+  --opo-link-pressed-color: var(--sys-color-link-primary-pressed);
+}
+
+.opo-link--secondary {
+  --opo-link-color: var(--sys-color-link-secondary); /* #88868d */
+  --opo-link-hover-color: var(--sys-color-link-secondary-hover);
+  --opo-link-pressed-color: var(--sys-color-link-secondary-pressed);
+}
+
+/* ==================== ORIENTATION ==================== */
+
+.opo-link--orientation-vertical {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sys-space-3xs);
+  text-align: center;
+}
+
+.opo-link--orientation-vertical
+  .opo-link__icon-start:not(.is-empty),
+.opo-link--orientation-vertical
+  .opo-link__icon-end:not(.is-empty) {
+  margin-inline: 0;
+}
+
+.opo-link--orientation-vertical .opo-link__icon-start,
+.opo-link--orientation-vertical .opo-link__icon-end {
+  display: inline-flex;
+  justify-content: center;
+  transform: none;
+}
+
+/* ==================== UNDERLINE ==================== */
+.opo-link__label {
+  min-inline-size: 0;
+}
+
+.opo-link--underline-reveal {
+  text-decoration-line: none;
+}
+
+.opo-link--underline-none,
+.opo-link--underline-none:hover:not(.is-disabled),
+.opo-link--underline-none:active:not(.is-disabled),
+.opo-link--underline-reveal,
+.opo-link--underline-reveal:hover:not(.is-disabled),
+.opo-link--underline-reveal:active:not(.is-disabled) {
+  text-decoration-line: none;
+}
+
+.opo-link--underline-reveal .opo-link__label {
+  position: relative;
+  display: inline-block;
+  padding-block-end: 0.15em;
+}
+
+.opo-link--underline-reveal .opo-link__label::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  block-size: 2px;
+  background-color: currentcolor;
+  opacity: 0.88;
+  transition: transform var(--ref-motion-duration-fast) ease;
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+.opo-link--underline-reveal:hover:not(.is-disabled) .opo-link__label::after,
+.opo-link--underline-reveal:focus-visible:not(.is-disabled)
+  .opo-link__label::after {
+  transform: scaleX(1);
+}
+
+/* ==================== STATIC COLORS ==================== */
+
+.opo-link--static-white {
+  --opo-link-color: var(--sys-color-text-inverse);
+}
+
+.opo-link--static-black {
+  --opo-link-color: var(--sys-color-text-primary);
+}
+
+.opo-link--static-white,
+.opo-link--static-black {
+  --opo-link-hover-color: var(--opo-link-color);
+  --opo-link-pressed-color: var(--opo-link-color);
+}
+
+/* ==================== STATES ==================== */
+
+.opo-link:focus-visible {
+  outline: var(--sys-outline-focus); /* #ff793f */
+  outline-offset: 2px;
+}
+
+.opo-link:hover:not(.is-disabled) {
+  color: var(
+    --opo-link-hover-color,
+    var(--opo-link-color)
+  );
+}
+
+.opo-link:active:not(.is-disabled) {
+  color: var(
+    --opo-link-pressed-color,
+    var(--opo-link-hover-color, var(--opo-link-color))
+  );
+}
+
+.opo-link.is-disabled {
+  color: var(--sys-color-on-action-disabled);
+  text-decoration-line: none;
+  cursor: not-allowed;
+}
+
+/* ==================== ICONS ==================== */
+.opo-link :where(
+  .opo-link__icon-start,
+  .opo-link__icon-end
+) {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  color: currentcolor;
+
+  /* optical alignment */
+  transform: translateY(0.03em);
+}
+
+.opo-link :where(
+  .opo-link__icon-start.is-empty,
+  .opo-link__icon-end.is-empty
+) {
+  display: none;
+}
+
+.opo-link ::slotted(opo-icon) {
+  color: currentcolor;
+}
+
+.opo-link__icon-start:not(.is-empty) {
+  margin-inline-end: var(--opo-link-icon-gap);
+}
+
+.opo-link__icon-end:not(.is-empty) {
+  margin-inline-start: var(--opo-link-icon-gap);
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .opo-link,
+  .opo-link--underline-reveal .opo-link__label::after {
+    transition: none;
+  }
+}

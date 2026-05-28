@@ -1,0 +1,112 @@
+/*
+ * Icon sizing is controlled from the host.
+ * The host defines the icon box using 1em, while size variants update font-size.
+ * The internal SVG then fills that box, keeping icons scalable and aligned with text.
+ */
+:host {
+  display: inline-flex;
+  flex-shrink: 0;
+  inline-size: 1em;
+  block-size: 1em;
+  color: inherit;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+:host([size='sm']) {
+  font-size: var(--ref-size-300);
+}
+
+:host([size='md']) {
+  font-size: var(--ref-size-500);
+}
+
+:host([size='lg']) {
+  font-size: var(--ref-size-700);
+}
+
+/* Prevents display:inline-flex from overriding the native hidden behavior. */
+:host([hidden]) {
+  display: none;
+}
+
+/* ==================== BASE ==================== */
+.opo-icon {
+  --opo-icon-size: var(--ref-size-500);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+  color: currentcolor;
+  transition: color var(--ref-motion-duration-faster) ease;
+}
+
+/* ==================== SIZES ==================== */
+.opo-icon--sm {
+  --opo-icon-size: var(--ref-size-300);
+}
+
+.opo-icon--md {
+  --opo-icon-size: var(--ref-size-500);
+}
+
+.opo-icon--lg {
+  --opo-icon-size: var(--ref-size-700);
+}
+
+/* ==================== COLORES SEMÁNTICOS ==================== */
+.opo-icon--color-primary {
+  color: var(--sys-color-brand-primary);
+}
+
+.opo-icon--color-secondary {
+  color: var(--sys-color-brand-accent);
+}
+
+.opo-icon--color-danger {
+  color: var(--sys-color-danger);
+}
+
+.opo-icon--color-success {
+  color: var(--sys-color-success);
+}
+
+.opo-icon--color-warning {
+  color: var(--sys-color-warning);
+}
+
+.opo-icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  color: currentcolor;
+  fill: currentcolor;
+  stroke: currentcolor;
+}
+
+/* ==================== ANIMACIONES ==================== */
+.is-spinning {
+  animation: icon-spin var(--ref-motion-duration-slower) linear infinite;
+  transform-origin: center;
+}
+
+@keyframes icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================== SOPORTE PARA SVG CUSTOM (slot) ==================== */
+:host ::slotted(svg) {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+
+/* ==================== CUSTOM SLOT ==================== */
+.opo-icon__custom.is-empty {
+  display: none;
+}

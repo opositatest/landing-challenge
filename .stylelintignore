@@ -1,0 +1,8 @@
+# Generated artifacts
+www/build/**
+dist/**
+storybook-static/**
+loader/**
+
+# Token source files with custom structure
+src/stylesheets/tokens/**

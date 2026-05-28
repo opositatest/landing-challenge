@@ -1,38 +1,30 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { baseTokens, semanticTokens } from './tokens-data';
+import { referenceColorTokens } from './tokens-data';
 
 <Meta title="Foundations/Colors" parameters={{ viewport: { disable: true } }} />
 
 <div className="style-guide-stories colors-stories">
-  # Colors
+  <header>
+    <h1>Colors</h1>
+    <p>{'Shared reference color tokens used as the visual foundation of the system. These values are intended to be consumed through system tokens when defining final UI semantics.'}</p>
+  </header>
 
-  <p>Base palette and shared semantic tokens used by both the landing and the component layer.</p>
+  <section>
+    <h2 id="reference-palette">Reference palette</h2>
 
-  ## Base
+    <div className="docs-token-grid">
+    {referenceColorTokens.map(([label, _var, hex, oklch]) => (
+      <div key={label} className="docs-token-card">
+        <div className="docs-token-surface" style={{ backgroundColor: hex }} />
 
-  <div className="color-palette">
-    {baseTokens.map(([label, variable]) => (
-      <div key={label} className="color-item">
-        <div className="color-name">
-          <strong>{label}</strong>
+        <div className="docs-token-card-caption">
+          <div className="color-title">{label}</div>
+          <div className="docs-token-code color-hex ">{hex}</div>
+          <div className="docs-token-code color-oklch">{oklch}</div>
         </div>
-        <div className="color-swatch" style={{ backgroundColor: `var(${variable})` }} />
-        <div className="color-hex">{variable}</div>
       </div>
     ))}
-  </div>
+    </div>
 
-  ## Semantic
-
-  <div className="color-palette">
-    {semanticTokens.map(([label, variable]) => (
-      <div key={label} className="color-item">
-        <div className="color-name">
-          <strong>{label}</strong>
-        </div>
-        <div className="color-swatch" style={{ backgroundColor: `var(${variable})` }} />
-        <div className="color-hex">{variable}</div>
-      </div>
-    ))}
-  </div>
+  </section>
 </div>
